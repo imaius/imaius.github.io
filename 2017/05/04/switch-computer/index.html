@@ -15,16 +15,17 @@
 
 
 
-<meta name="description" content="憨人的个人博客，记录点滴。">
+<meta name="description" content="hexo是一个优秀的主题框架，可是它没有后台，写作只能在本地，如果你想换电脑继续进行写作，使用hexo将怎么更新博客？">
+<meta name="keywords" content="建站,hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux&#x2F;windows&#x2F;mac下的node.js的安装">
-<meta property="og:url" content="http://imayday.me/2017/05/02/install-nodejs/index.html">
+<meta property="og:title" content="更换电脑继续进行hexo写作">
+<meta property="og:url" content="http://imayday.me/2017/05/04/switch-computer/index.html">
 <meta property="og:site_name" content="一只憨人">
-<meta property="og:description" content="憨人的个人博客，记录点滴。">
-<meta property="og:updated_time" content="2017-05-03T05:02:08.873Z">
+<meta property="og:description" content="hexo是一个优秀的主题框架，可是它没有后台，写作只能在本地，如果你想换电脑继续进行写作，使用hexo将怎么更新博客？">
+<meta property="og:updated_time" content="2017-05-04T02:01:58.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux&#x2F;windows&#x2F;mac下的node.js的安装">
-<meta name="twitter:description" content="憨人的个人博客，记录点滴。">
+<meta name="twitter:title" content="更换电脑继续进行hexo写作">
+<meta name="twitter:description" content="hexo是一个优秀的主题框架，可是它没有后台，写作只能在本地，如果你想换电脑继续进行写作，使用hexo将怎么更新博客？">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>linux/windows/mac下的node.js的安装 | 一只憨人</title>
+<title>更换电脑继续进行hexo写作 | 一只憨人</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -255,11 +256,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-install-nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-switch-computer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/02/install-nodejs/" class="article-date">
-      <time datetime="2017-05-02T09:27:34.000Z" itemprop="datePublished">2017-05-02</time>
+      <a href="/2017/05/04/switch-computer/" class="article-date">
+      <time datetime="2017-05-04T01:46:51.000Z" itemprop="datePublished">2017-05-04</time>
 </a>
 
 
@@ -274,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      linux/windows/mac下的node.js的安装
+      更换电脑继续进行hexo写作
     </h1>
   
 
@@ -284,6 +285,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/建站/">建站</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,7 +296,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p>&emsp;&emsp;hexo是一个没有后台的主题框架，写作只能在本地，如果你想换电脑继续进行写作，那么你可以参考下面的方法：</p>
+<h3 id="1-从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建："><a href="#1-从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建：" class="headerlink" title="1.从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建："></a>1.从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建：</h3><ul>
+<li>打开git bash，在用户主目录下运行：ssh-keygen -t rsa -C “youremail@example.com” 把其中的邮件地址换成自己的邮件地址，然后一路回车</li>
+<li>最后完成后，会在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥，千万不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</li>
+<li>登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容（千万不要粘贴成私钥了！），最后点击「Add SSH Key」，你就应该看到已经添加的Key。注意：不要在git版本库中运行ssh，然后又将它提交，这样就把密码泄露出去了。</li>
+</ul>
+<h3 id="2-下载Node-js，并安装"><a href="#2-下载Node-js，并安装" class="headerlink" title="2.下载Node.js，并安装"></a>2.下载Node.js，并安装</h3><h3 id="3-打开git-bash客户端，输入-npm-install-hexo-cli-g，开始安装hexo"><a href="#3-打开git-bash客户端，输入-npm-install-hexo-cli-g，开始安装hexo" class="headerlink" title="3.打开git bash客户端，输入 npm install hexo-cli -g，开始安装hexo"></a>3.打开git bash客户端，输入 npm install hexo-cli -g，开始安装hexo</h3><h3 id="4-下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。"><a href="#4-下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。" class="headerlink" title="4.下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。"></a>4.下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。</h3><ul>
+<li>讨论下哪些文件是必须拷贝的：首先是之前自己修改的文件，像站点配置_config.yml，theme文件夹里面的主题，以及source里面自己写的博客文件，这些肯定要拷贝的。除此之外，还有三个文件需要有，就是scaffolds文件夹（文章的模板）、package.json（说明使用哪些包）和.gitignore（限定在提交的时候哪些文件可以忽略）。其实，这三个文件不是我们修改的，所以即使丢失了，也没有关系，我们可以建立一个新的文件夹，然后在里面执行hexo init，就会生成这三个文件，我们只需要将它们拷贝过来使用即可。总结：_config.yml，theme/，source/，scaffolds/，package.json，.gitignore，是需要拷贝的。</li>
+<li>再讨论下哪些文件是不必拷贝的，或者说可以删除的：首先是.git文件，无论是在站点根目录下，还是主题目录下的.git文件，都可以删掉。然后是文件夹node_modules（在用npm install会重新生成），public（这个在用hexo g时会重新生成），.deploy_git文件夹（在使用hexo d时也会重新生成），db.json文件。其实上面这些文件也就是是.gitignore文件里面记载的可以忽略的内容。总结：.git/，node_modules/，public/，.deploy_git/，db.json文件需要删除。</li>
+</ul>
+<h3 id="5-在git-bash中切换目录到新拷贝的文件夹里，使用-npm-install-命令，进行模块安装。很明显我们这里没用hexo-init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo-init去整体初始化，如果不慎在此时用了hexo-init，则站点的配置文件-config-yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo-init。"><a href="#5-在git-bash中切换目录到新拷贝的文件夹里，使用-npm-install-命令，进行模块安装。很明显我们这里没用hexo-init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo-init去整体初始化，如果不慎在此时用了hexo-init，则站点的配置文件-config-yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo-init。" class="headerlink" title="5.在git bash中切换目录到新拷贝的文件夹里，使用 npm install 命令，进行模块安装。很明显我们这里没用hexo init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo init去整体初始化，如果不慎在此时用了hexo init，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo init。"></a>5.在git bash中切换目录到新拷贝的文件夹里，使用 npm install 命令，进行模块安装。很明显我们这里没用hexo init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo init去整体初始化，如果不慎在此时用了hexo init，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo init。</h3><h3 id="6-安装其他的一些必要组件，如果在node-modules里面有的，就不要重复安装了："><a href="#6-安装其他的一些必要组件，如果在node-modules里面有的，就不要重复安装了：" class="headerlink" title="6.安装其他的一些必要组件，如果在node_modules里面有的，就不要重复安装了："></a>6.安装其他的一些必要组件，如果在node_modules里面有的，就不要重复安装了：</h3><ul>
+<li>为了使用hexo d来部署到git上，需要安装npm install hexo-deployer-git –save</li>
+<li>为了建立RSS订阅，需要安装npm install hexo-generator-feed –save</li>
+<li>为了建立站点地图，需要安装npm install hexo-generator-sitemap –save插件安装后，有的需要对配置文件_config.yml进行配置，具体怎么配置，可以参考上面插件在github主页上的具体说明</li>
+</ul>
+<h3 id="7-使用hexo-g，然后使用hexo-d进行部署，如果都没有出错，就转移成功了！"><a href="#7-使用hexo-g，然后使用hexo-d进行部署，如果都没有出错，就转移成功了！" class="headerlink" title="7.使用hexo g，然后使用hexo d进行部署，如果都没有出错，就转移成功了！"></a>7.使用hexo g，然后使用hexo d进行部署，如果都没有出错，就转移成功了！</h3>
       
     </div>
     
@@ -299,13 +319,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/02/install-nodejs/">linux/windows/mac下的node.js的安装</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/04/switch-computer/">更换电脑继续进行hexo写作</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
-        <p><span>发布时间:</span>2017-05-02, 17:27:34</p>
-        <p><span>最后更新:</span>2017-05-03, 13:02:08</p>
+        <p><span>发布时间:</span>2017-05-04, 09:46:51</p>
+        <p><span>最后更新:</span>2017-05-04, 10:01:58</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/02/install-nodejs/" title="linux/windows/mac下的node.js的安装">http://imayday.me/2017/05/02/install-nodejs/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/02/install-nodejs/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/04/switch-computer/" title="更换电脑继续进行hexo写作">http://imayday.me/2017/05/04/switch-computer/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/04/switch-computer/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -317,16 +337,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/04/switch-computer/">
-                    更换电脑继续进行hexo写作
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/01/first-article/">
-                    利用github配合hexo搭建博客
+                <a href="/2017/05/02/install-nodejs/">
+                    linux/windows/mac下的node.js的安装
                 </a>
             </div>
         
@@ -338,7 +352,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建："><span class="toc-number">1.</span> <span class="toc-text">1.从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载Node-js，并安装"><span class="toc-number">2.</span> <span class="toc-text">2.下载Node.js，并安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-打开git-bash客户端，输入-npm-install-hexo-cli-g，开始安装hexo"><span class="toc-number">3.</span> <span class="toc-text">3.打开git bash客户端，输入 npm install hexo-cli -g，开始安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。"><span class="toc-number">4.</span> <span class="toc-text">4.下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-在git-bash中切换目录到新拷贝的文件夹里，使用-npm-install-命令，进行模块安装。很明显我们这里没用hexo-init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo-init去整体初始化，如果不慎在此时用了hexo-init，则站点的配置文件-config-yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo-init。"><span class="toc-number">5.</span> <span class="toc-text">5.在git bash中切换目录到新拷贝的文件夹里，使用 npm install 命令，进行模块安装。很明显我们这里没用hexo init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo init去整体初始化，如果不慎在此时用了hexo init，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo init。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-安装其他的一些必要组件，如果在node-modules里面有的，就不要重复安装了："><span class="toc-number">6.</span> <span class="toc-text">6.安装其他的一些必要组件，如果在node_modules里面有的，就不要重复安装了：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-使用hexo-g，然后使用hexo-d进行部署，如果都没有出错，就转移成功了！"><span class="toc-number">7.</span> <span class="toc-text">7.使用hexo g，然后使用hexo d进行部署，如果都没有出错，就转移成功了！</span></a></li></ol>
         
     </div>
     <style>
@@ -374,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"linux/windows/mac下的node.js的安装　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"更换电脑继续进行hexo写作　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -393,8 +407,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://imayday.me/2017/05/02/install-nodejs/';
-            this.page.identifier = '2017/05/02/install-nodejs/';
+            this.page.url = 'http://imayday.me/2017/05/04/switch-computer/';
+            this.page.identifier = '2017/05/04/switch-computer/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -416,15 +430,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/04/switch-computer/" title="上一篇: 更换电脑继续进行hexo写作">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/01/first-article/" title="下一篇: 利用github配合hexo搭建博客">
+            <a href="/2017/05/02/install-nodejs/" title="下一篇: linux/windows/mac下的node.js的安装">
                 <i class="fa fa-angle-right"></i>
             </a>
         
