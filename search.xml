@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[linux/windows/mac下的node.js的安装]]></title>
+      <url>/2017/05/02/install-nodejs/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[利用github配合hexo搭建博客]]></title>
+      <url>/2017/05/01/first-article/</url>
+      <content type="html"><![CDATA[<h2 id="博客初衷"><a href="#博客初衷" class="headerlink" title="博客初衷"></a>博客初衷</h2><p>&emsp;&emsp;一直有一个想法，想把自己的博客整的干净点，技术、随笔之类的东西专门搞一个小博客，之前的站太砸碎了，作为一个资深五迷，我果断的注册了imayday.me这个域名，并在五月来临之际着手搞这个博客，于是。。。本博客的第一篇文章出现了~~o(∩_∩)o</p>
+<h2 id="着手开始"><a href="#着手开始" class="headerlink" title="着手开始"></a>着手开始</h2><p>&emsp;&emsp;看了很多博客框架，wordpress、emlog、zblog等等，最终我还是将我的博客选用了hexo的框架，觉得这个框架其实比较轻量，比较适合个人使用，最重要的是，你只需要购买一个域名就能使用啦，省去了空间或者服务器的费用，同时也能满足一下我瞎折腾的欲望，下面介绍一下让这个博客上线的过程，也算是个建站日志吧！</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>需要安装的环境：<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a>&emsp;&emsp;&emsp;&emsp;(node.js的安装可以点<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="external">这里</a>)</li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="external">git</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(git的安装可以点<a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">这里</a>)</li>
+</ul>
+</li>
+<li>其他需要的准备<ul>
+<li>购买一个域名，这点要说，不用备案即可使用，也是比较方便的。购买域名的途径有很多，我的域名imayday.me是在万网购买的。</li>
+<li>注册一个<a href="https://github.com" target="_blank" rel="external">github</a>账号。你的博客将靠它实现访问。<br>&emsp;&emsp;OK!做完了以上的工作，你就可以开始安装hexo主题框架了！</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>&emsp;&emsp;所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<pre><code>$ npm install -g hexo-cli
+</code></pre><p>&emsp;&emsp;创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：</p>
+<pre><code>hexo init
+</code></pre><p>&emsp;&emsp;好啦，至此，全部安装工作已经完成！</p>
+<p>&emsp;&emsp;因为Hexo编写的文章都是用 markdown语法写的 所以需要生成静态界面也就是Html网页。</p>
+<h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><p>&emsp;&emsp;继续在刚才的Blog目录下执行如下命令，生成静态页面</p>
+<pre><code>hexo generate （hexo g  缩写也可以）
+</code></pre><h3 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h3><p>&emsp;&emsp;启动本地服务，进行文章预览调试，命令：</p>
+<pre><code>hexo server    （hexo s  缩写也可以）
+</code></pre><p>&emsp;&emsp;开启本地预览服务，打开浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可看到内容，很多人会碰到浏览器一直在转圈但是就是加载不出来的问题，一般情况下是因为端口占用的缘故，因为4000这个端口太常见了 ，可以更换个端口号 然后再执行 hexo s<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo server -p 5000 #更改端口随意写</div><div class="line">hexo server -i 192.168.1.1 #自定义 IP</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;运行成功后按Control+L可以停止 如果直接用Hexo s启动会提示错误 就是已经被占用了 所以正确的命令应该是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</div><div class="line">hexo g #生成静态网页</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;上边算是搭建了一个本地的博客系统了 然后就是配置Git了用git就可以把博客移动到远程服务器访问类似<a href="http://imayday.me">我的博客</a></p>
+<h3 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h3><ul>
+<li>建立Repository</li>
+</ul>
+<p>&emsp;&emsp;建立与你用户名对应的仓库，仓库名必须为【useame.github.io】固定写法</p>
+<ul>
+<li>建立关联</li>
+</ul>
+<p>&emsp;&emsp;打开Blog在本地/Users/wangsen/Blog，Blog是之前建Hexo的文件，有：</p>
+<blockquote>
+<p>Blog<br>　｜<br>　｜－－ _config.yml<br>　｜－－ node_modules<br>　｜－－ public<br>　｜－－ source<br>　｜－－ db.json<br>　｜－－ package.json<br>　｜－－ scaffolds<br>　｜－－ themes</p>
+</blockquote>
+<p>&emsp;&emsp;现在我们需要打开_config.yml文件，来建立关联，命令：</p>
+<pre><code>vim _config.yml   我建议用sublime
+</code></pre><p>&emsp;&emsp;如果终端不是在Blog目录就cd到该目录执行命令,epository地址换成你自己的git地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/imaius/imaius.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;执行如下命令才能使用git部署</p>
+<pre><code>npm install hexo-deployer-git --save
+</code></pre><p>配置命令：</p>
+<pre><code>hexo deploy
+</code></pre><p>&emsp;&emsp;作用就是把blog目录下的Public目录下的文件上传至git仓库<br>&emsp;&emsp;然后再浏览器中输入就行了<a href="http://imaius.github.io/，我的" target="_blank" rel="external">http://imaius.github.io/，我的</a> github 的账户叫 imaius ,把这个改成你 github 的账户名就行了<br>&emsp;&emsp;每次修改博客文件后都需要从新部署<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<p><strong><a href="http://www.jianshu.com/p/eb02029f7a81" target="_blank" rel="external">一些常用命令</a></strong></p>
+<h3 id="域名绑定-可选"><a href="#域名绑定-可选" class="headerlink" title="域名绑定(可选)"></a>域名绑定(可选)</h3><p>&emsp;&emsp;其实这一步之前就已经可以正常访问了，有需要的继续进行下一步。</p>
+<p>&emsp;&emsp;首先登录你的github，建一个项目，命名格式为： 账户.github.io，如下图（我的已经建过了所以提示已存在）<br><img src="https://ooo.0o0.ooo/2017/05/03/59096f3dd88b8.png" alt=""> </p>
+<p>&emsp;&emsp;然后你需要把你的域名做一个chanel记录，记录值为上面的域名，我的就是imaius.github.io&emsp;然后在你的本地站点目录里的source目录下添加一个CNAME文件，不带后缀，可以用终端切换到source目录下，执行命令如下</p>
+<pre><code>vim CNAME
+</code></pre><p>&emsp;&emsp;内容是域名地址不带www和http 就类似我的是 imayday.me，填写完了之后再重新部署到github pages上（部署简写命令hexo d -g)，打开自己的博客尽情开始各种蹂躏吧</p>
+<h2 id="说在最后"><a href="#说在最后" class="headerlink" title="说在最后"></a>说在最后</h2><p>&emsp;&emsp;至此博客已经部署成功，如过你有什么疑问也可以在这里留言~本博客准备长期维护，希望各位多多捧场！</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 建站教程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 建站 </tag>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
