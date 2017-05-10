@@ -15,16 +15,17 @@
 
 
 
-<meta name="description" content="憨人的个人博客，记录点滴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404">
-<meta property="og:url" content="http://imayday.me/404/index.html">
+<meta name="description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
+<meta name="keywords" content="linux,运维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令行在su root后突然变成bash-4.1$的办法">
+<meta property="og:url" content="http://imayday.me/2017/05/10/linuxsuroot/index.html">
 <meta property="og:site_name" content="一只憨人">
-<meta property="og:description" content="憨人的个人博客，记录点滴。">
-<meta property="og:updated_time" content="2017-05-02T05:11:23.778Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
+<meta property="og:updated_time" content="2017-05-10T15:03:05.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404">
-<meta name="twitter:description" content="憨人的个人博客，记录点滴。">
+<meta name="twitter:title" content="Linux命令行在su root后突然变成bash-4.1$的办法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>404 | 一只憨人</title>
+<title>Linux命令行在su root后突然变成bash-4.1$的办法 | 一只憨人</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,7 +67,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -255,11 +256,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-linuxsuroot" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/404/index.html" class="article-date">
-      <time datetime="2017-05-02T05:11:23.000Z" itemprop="datePublished">2017-05-02</time>
+      <a href="/2017/05/10/linuxsuroot/" class="article-date">
+      <time datetime="2017-05-10T14:48:11.000Z" itemprop="datePublished">2017-05-10</time>
 </a>
 
 
@@ -274,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      404
+      Linux命令行在su root后突然变成bash-4.1$的办法
     </h1>
   
 
@@ -282,8 +283,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/linux运维/">linux运维</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,36 +300,76 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <p>&emsp;&emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况</p>
+<p>&emsp;&emsp;输入各种命令都是不行的。。不过我找到了解决方法：</p>
+<p>&emsp;&emsp;1. 在根目录下建立root目录</p>
+<p>&emsp;&emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。<br>经测试是有效的，希望能帮助到你~</p>
 
-
-          
-        
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
+        <p><span>发布时间:</span>2017-05-10, 22:48:11</p>
+        <p><span>最后更新:</span>2017-05-10, 23:03:05</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/10/linuxsuroot/" title="Linux命令行在su root后突然变成bash-4.1$的办法">http://imayday.me/2017/05/10/linuxsuroot/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/10/linuxsuroot/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/05/10/KODExpore/">
+                    记一次关于KODExpore版权修改过程
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/05/04/switch-computer/">
+                    更换电脑继续进行hexo写作
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -338,7 +387,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"404　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Linux命令行在su root后突然变成bash-4.1$的办法　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -357,8 +406,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://imayday.me/404/index.html';
-            this.page.identifier = '404/index.html';
+            this.page.url = 'http://imayday.me/2017/05/10/linuxsuroot/';
+            this.page.identifier = '2017/05/10/linuxsuroot/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -375,6 +424,26 @@
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/05/10/KODExpore/" title="上一篇: 记一次关于KODExpore版权修改过程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/05/04/switch-computer/" title="下一篇: 更换电脑继续进行hexo写作">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/movewordpress/">史上最全wordpress搬家教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/Autoptimize/">关于wordpress主题中Autoptimize插件的报错</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/fiddlercore/">fiddlercore C#程序参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/phpincrse/">php下载地址递增代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/KODExpore/">记一次关于KODExpore版权修改过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/switch-computer/">更换电脑继续进行hexo写作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/install-nodejs/">linux/windows/mac下的node.js的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/first-article/">利用github配合hexo搭建博客</a></li></ul>
 
 
 
