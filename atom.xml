@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://imayday.me/"/>
-  <updated>2017-05-10T15:26:56.593Z</updated>
+  <updated>2017-05-15T21:33:01.052Z</updated>
   <id>http://imayday.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://imayday.me/2017/05/10/movewordpress/"/>
     <id>http://imayday.me/2017/05/10/movewordpress/</id>
     <published>2017-05-10T15:25:42.000Z</published>
-    <updated>2017-05-10T15:26:56.593Z</updated>
+    <updated>2017-05-15T21:33:01.052Z</updated>
     
     <content type="html"><![CDATA[<p>个人原因需要给网站搬家到新的服务器，拷贝文件、导出数据库这些基本的就不说了，按照网上的流程走完后，始终不能达到效果！<br>折腾了一下午总算搞定，下面列出用到的工具：</p>
 <p>1.wp clone by WP Academy 插件。</p>
@@ -44,9 +44,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;个人原因需要给网站搬家到新的服务器，拷贝文件、导出数据库这些基本的就不说了，按照网上的流程走完后，始终不能达到效果！&lt;br&gt;折腾了一下午总算搞定，下面列出用到的工具：&lt;/p&gt;
-&lt;p&gt;1.wp clone by WP Academy 插件。&lt;/p&gt;
-&lt;p&gt;这是一个很方便的Wo
+      个人原因需要给网站搬家到新的服务器，拷贝文件、导出数据库这些基本的就不说了，按照网上的流程走完后，始终不能达到效果！ 折腾了一下午总算搞定，下面列出用到的工具
     
     </summary>
     
@@ -87,7 +85,7 @@
     <link href="http://imayday.me/2017/05/10/fiddlercore/"/>
     <id>http://imayday.me/2017/05/10/fiddlercore/</id>
     <published>2017-05-10T15:13:05.000Z</published>
-    <updated>2017-05-10T15:21:13.869Z</updated>
+    <updated>2017-05-15T21:35:59.623Z</updated>
     
     <content type="html"><![CDATA[<h3 id="截获请求"><a href="#截获请求" class="headerlink" title="截获请求"></a>截获请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Fiddler.FiddlerApplication.BeforeRequest += delegate(Fiddler.Session oS)</div><div class="line">&#123;</div><div class="line">oS.bBufferResponse = true;</div><div class="line">HTTPRequestHeaders rHeads = oS.oRequest.headers;</div><div class="line"></div><div class="line">if (oS.fullUrl == &quot;http://www.sufeinet.com/&quot;)</div><div class="line">&#123;</div><div class="line">cookie = rHeads.AllValues(&quot;cookie&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="截获响应"><a href="#截获响应" class="headerlink" title="截获响应"></a>截获响应</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">static void FiddlerApplication_BeforeResponse(Fiddler.Session oSession)</div><div class="line">&#123;</div><div class="line">if (oSession.fullUrl == &quot;http://www.sufeinet.com/&quot;)</div><div class="line">&#123;</div><div class="line">//body为响应的数据</div><div class="line">string body = oSession.GetResponseBodyAsString();</div><div class="line">oSession.utilDecodeResponse();</div><div class="line">//修改响应</div><div class="line">oSession.utilSetResponseBody(&quot;浏览器请求时发送的cookie:&quot; + cookie + &quot; Hello world!&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -104,7 +102,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;截获请求&quot;&gt;&lt;a href=&quot;#截获请求&quot; class=&quot;headerlink&quot; title=&quot;截获请求&quot;&gt;&lt;/a&gt;截获请求&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+      fiddler是强大的抓包工具，它提供了一个fiddlercore.dll，可以让你把fiddler的功能集成到自己的程序里去。感受强大的抓包乐趣！之前玩机器人尝试绕过授权使用了它，下面就在这里做个记录。
     
     </summary>
     
@@ -146,7 +144,7 @@ for($i=100;$i&lt;=559;$i++)echo "http://www.sxmbsd.com/SRKL/DM/$i.jpg\r\n"
     <link href="http://imayday.me/2017/05/10/KODExpore/"/>
     <id>http://imayday.me/2017/05/10/KODExpore/</id>
     <published>2017-05-10T14:53:22.000Z</published>
-    <updated>2017-05-10T15:08:53.467Z</updated>
+    <updated>2017-05-15T21:36:58.395Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。</p>
 <h3 id="1-footer部分"><a href="#1-footer部分" class="headerlink" title="1.footer部分"></a>1.footer部分</h3><p>&emsp;&emsp;这一部分疑似检索页内关键词，必须存在版权信息。我们巧妙的利用footer的bug绕过这个。<br>文件位于 /template/common/footer.html。打开文件，很明显的可以看到这行代码，这就是版权信息。</p>
@@ -163,8 +161,7 @@ for($i=100;$i&lt;=559;$i++)echo "http://www.sxmbsd.com/SRKL/DM/$i.jpg\r\n"
     
     <summary type="html">
     
-      &lt;p&gt;&amp;emsp;&amp;emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。&lt;/p&gt;
-&lt;h3 id=&quot;1-f
+      &amp;emsp;&amp;emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。
     
     </summary>
     
