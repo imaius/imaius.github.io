@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://imayday.me/2017/05/26/ss-bbr/index.html">
 <meta property="og:site_name" content="一只憨人">
 <meta property="og:description" content="这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。 下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Eng">
-<meta property="og:updated_time" content="2017-05-26T08:56:35.247Z">
+<meta property="og:updated_time" content="2017-05-26T09:00:36.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录利用免费的谷歌云搭建ss和bbr遇到的坑">
 <meta name="twitter:description" content="这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。 下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Eng">
@@ -296,8 +296,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。</p>
-<p>下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Engine，是 GCP 产品线里的一个主机产品。</p>
+        <p>这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。<br>下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Engine，是 GCP 产品线里的一个主机产品。</p>
 <h2 id="本文前提条件"><a href="#本文前提条件" class="headerlink" title="本文前提条件"></a>本文前提条件</h2><ol>
 <li>有一个 Google 账号，没有的话可以注册一个。</li>
 <li>注册 GCP 免费试用需要用信用卡进行身份验证（只做验证，不会收费），所以你必须有一个 Visa/MasterCard 的信用卡才行。</li>
@@ -322,7 +321,7 @@
 <li>地区：建议选择 asia-east1-* 三个中的任意一个，这个机房是在台湾，国内的延迟只有 50~70ms，简直快到飞起。</li>
 <li>机器类型：选择 “小型” (1.7G 内存) 就可以了。默认选中的 3.75G 的内存其实用不完。</li>
 <li>启动磁盘：默认的Debian 8就可以，推荐 Ubuntu 16.04 LTS。另外为了防止将来磁盘不够用，你可以点击右下角的更改，大小里使用 20G 或者 30G。</li>
-<li>防火墙：选中 “允许HTTP流量” 和 ”允许HTTPS流量“<br>点击创建，稍等几分钟就会创建完毕，现在打开 HyperApp 开始配置这台服务器吧。<h2 id="安装BBR"><a href="#安装BBR" class="headerlink" title="安装BBR"></a>安装BBR</h2>&emsp;&emsp;最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，最新的 4.11 版内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。<br>根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</li>
+<li>防火墙：选中 “允许HTTP流量” 和 ”允许HTTPS流量“<br>点击创建，稍等几分钟就会创建完毕，现在打开 HyperApp 开始配置这台服务器吧。<h3 id="连接GCE"><a href="#连接GCE" class="headerlink" title="连接GCE"></a>连接GCE</h3>GCE是不提供root账户登录的，这点与一般的运营商有所区别，用户需要自己搞ssh，具体可以参阅<a href="https://www.91yun.org/archives/2297" target="_blank" rel="external">GCE的连接</a>。<h2 id="安装BBR"><a href="#安装BBR" class="headerlink" title="安装BBR"></a>安装BBR</h2>&emsp;&emsp;最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，最新的 4.11 版内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。<br>根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</li>
 </ul>
 </li>
 </ol>
@@ -356,7 +355,7 @@
         <p><span>本文标题:</span><a href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
         <p><span>发布时间:</span>2017-05-26, 16:11:12</p>
-        <p><span>最后更新:</span>2017-05-26, 16:56:35</p>
+        <p><span>最后更新:</span>2017-05-26, 17:00:36</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/05/26/ss-bbr/" title="记录利用免费的谷歌云搭建ss和bbr遇到的坑">http://imayday.me/2017/05/26/ss-bbr/</a>
             <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/26/ss-bbr/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -387,7 +386,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文前提条件"><span class="toc-number">1.</span> <span class="toc-text">本文前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCP-注册以及创建服务器"><span class="toc-number">2.</span> <span class="toc-text">GCP 注册以及创建服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-GCP-免费试用"><span class="toc-number">2.1.</span> <span class="toc-text">注册 GCP 免费试用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建主机"><span class="toc-number">2.2.</span> <span class="toc-text">新建主机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装BBR"><span class="toc-number">3.</span> <span class="toc-text">安装BBR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wget-unable-to-resolve-host-address"><span class="toc-number">3.1.</span> <span class="toc-text">wget: unable to resolve host address</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-only-file-system"><span class="toc-number">3.2.</span> <span class="toc-text">Read-only file system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续安装"><span class="toc-number">3.3.</span> <span class="toc-text">继续安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大功告成"><span class="toc-number">4.</span> <span class="toc-text">大功告成</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文前提条件"><span class="toc-number">1.</span> <span class="toc-text">本文前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCP-注册以及创建服务器"><span class="toc-number">2.</span> <span class="toc-text">GCP 注册以及创建服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-GCP-免费试用"><span class="toc-number">2.1.</span> <span class="toc-text">注册 GCP 免费试用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建主机"><span class="toc-number">2.2.</span> <span class="toc-text">新建主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接GCE"><span class="toc-number">2.3.</span> <span class="toc-text">连接GCE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装BBR"><span class="toc-number">3.</span> <span class="toc-text">安装BBR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wget-unable-to-resolve-host-address"><span class="toc-number">3.1.</span> <span class="toc-text">wget: unable to resolve host address</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-only-file-system"><span class="toc-number">3.2.</span> <span class="toc-text">Read-only file system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续安装"><span class="toc-number">3.3.</span> <span class="toc-text">继续安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大功告成"><span class="toc-number">4.</span> <span class="toc-text">大功告成</span></a></li></ol>
         
     </div>
     <style>
