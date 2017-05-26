@@ -190,7 +190,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autoptimize/">Autoptimize</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KODExpore/">KODExpore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddlercore/">fiddlercore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpres/">wordpres</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/建站/">建站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搬家/">搬家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autoptimize/">Autoptimize</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCE/">GCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KODExpore/">KODExpore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bbr/">bbr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddlercore/">fiddlercore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpres/">wordpres</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/建站/">建站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搬家/">搬家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
                     </div>
                 </section>
                 
@@ -260,6 +260,114 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-ss-bbr" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/26/ss-bbr/" class="article-date">
+      <time datetime="2017-05-26T08:11:12.000Z" itemprop="datePublished">2017-05-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。</p>
+<p>下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Engine，是 GCP 产品线里的一个主机产品。</p>
+<h2 id="本文前提条件"><a href="#本文前提条件" class="headerlink" title="本文前提条件"></a>本文前提条件</h2><ol>
+<li>有一个 Google 账号，没有的话可以注册一个。</li>
+<li>注册 GCP 免费试用需要用信用卡进行身份验证（只做验证，不会收费），所以你必须有一个 Visa/MasterCard 的信用卡才行。</li>
+</ol>
+<h2 id="GCP-注册以及创建服务器"><a href="#GCP-注册以及创建服务器" class="headerlink" title="GCP 注册以及创建服务器"></a>GCP 注册以及创建服务器</h2><p>要访问 Google 首先需要你能科学上网，但是这篇文章又是介绍如何科学上网的，好像有点鸡生蛋蛋生鸡的矛盾… 其实你可以去App Store搜索 V屁恩，找一个免费的下载后，通过签到等方式暂时领取一天或者几个小时的免费低速试用来完成下面的教程。</p>
+<h3 id="注册-GCP-免费试用"><a href="#注册-GCP-免费试用" class="headerlink" title="注册 GCP 免费试用"></a>注册 GCP 免费试用</h3><ol>
+<li>登录Google账号后使用这个链接来注册 <a href="https://cloud.google.com/free/" target="_blank" rel="external">https://cloud.google.com/free/</a> ，在打开的页面中点击<code>Try it Free</code>。</li>
+<li>接受条款，并点击<code>同意并继续</code>。</li>
+<li>在页面中填入你的信息：<ul>
+<li>账号类型：个人</li>
+<li>名称和地址：填写你的地址、电话等</li>
+<li>付款方式：添加一个信用卡。这个信用卡将会用来验证身份，防止GCP被滥用。</li>
+<li>点击 开始免费使用 完成注册</li>
+</ul>
+</li>
+</ol>
+<p>在后面的页面中，如果你能看到页面顶部有一个“礼物” 的小图标，说明已经获取了试用金。</p>
+<h3 id="新建主机"><a href="#新建主机" class="headerlink" title="新建主机"></a>新建主机</h3><ol>
+<li>在左侧菜单中导航到 计算引擎 → VM 实例</li>
+<li>点击加号按钮，创建一个 VM 实例。<ul>
+<li>名称：随意填入一个易记得名字</li>
+<li>地区：建议选择 asia-east1-* 三个中的任意一个，这个机房是在台湾，国内的延迟只有 50~70ms，简直快到飞起。</li>
+<li>机器类型：选择 “小型” (1.7G 内存) 就可以了。默认选中的 3.75G 的内存其实用不完。</li>
+<li>启动磁盘：默认的Debian 8就可以，推荐 Ubuntu 16.04 LTS。另外为了防止将来磁盘不够用，你可以点击右下角的更改，大小里使用 20G 或者 30G。</li>
+<li>防火墙：选中 “允许HTTP流量” 和 ”允许HTTPS流量“<br>点击创建，稍等几分钟就会创建完毕，现在打开 HyperApp 开始配置这台服务器吧。<h2 id="安装BBR"><a href="#安装BBR" class="headerlink" title="安装BBR"></a>安装BBR</h2>&emsp;&emsp;最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，最新的 4.11 版内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。<br>根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</li>
+</ul>
+</li>
+</ol>
+<p>这里引用了<a href="https://teddysun.com/489.html" target="_blank" rel="external">一键安装最新内核并开启 BBR 脚本</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</div><div class="line">chmod +x bbr.sh</div><div class="line">./bbr.sh</div></pre></td></tr></table></figure></p>
+<p>验证安装成功执行</p>
+<pre><code>lsmod | grep bbr
+</code></pre><p>返回值有 tcp_bbr 模块即说明bbr已启动。</p>
+<p>##安装shadowsocks<br>这里有很多可选，具体参见<a href="https://shadowsocks.be/" target="_blank" rel="external">ss非官方网站</a>,此处采用了占资源最小的ss-libev版本。<br>坑就在这里，应该是开启了bbr后，系统一些东西被更改了。</p>
+<h3 id="wget-unable-to-resolve-host-address"><a href="#wget-unable-to-resolve-host-address" class="headerlink" title="wget: unable to resolve host address"></a>wget: unable to resolve host address</h3><p>wget 用不了了，解析不了脚本地址，解决方法为添加dns</p>
+<ol>
+<li>登入root（VPS）。</li>
+<li>进入/etc/resolv.conf。</li>
+<li>修改内容为下</li>
+</ol>
+<blockquote>
+<p>nameserver 8.8.8.8 #google域名服务器</p>
+<p>nameserver 8.8.4.4 #google域名服务器</p>
+</blockquote>
+<h3 id="Read-only-file-system"><a href="#Read-only-file-system" class="headerlink" title="Read-only file system"></a>Read-only file system</h3><p>刚解决了dns，又出现系统文件只读的问题。。。很简单 只需一步</p>
+<pre><code>mount -o  remount rw /
+</code></pre><h3 id="继续安装"><a href="#继续安装" class="headerlink" title="继续安装"></a>继续安装</h3><p>接下来就可以按照脚本正常安装了。</p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h2><p>尽情的享受吧。我的电信环境，实测ping50ms，非常好。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GCE/">GCE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bbr/">bbr</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-movewordpress" class="article article-type-post" itemscope itemprop="blogPost">
   
