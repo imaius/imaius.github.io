@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://imayday.me/"/>
-  <updated>2017-05-26T09:00:36.412Z</updated>
+  <updated>2017-05-27T09:13:21.315Z</updated>
   <id>http://imayday.me/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>xp系统还原与恢复</title>
+    <link href="http://imayday.me/2017/05/27/ghost/"/>
+    <id>http://imayday.me/2017/05/27/ghost/</id>
+    <published>2017-05-27T06:37:45.000Z</published>
+    <updated>2017-05-27T09:13:21.315Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;操作系统的备份和还原对任何人来说都是非常重要的， 比如说，电脑长期使用，导致启动或者运行都特别的慢，C盘占用了大量的垃圾文件，这个时候手动清理起来会特别的麻烦，或者说由于操作上的失误，导致系统崩溃， 这个时候如果平时有做系统备份，这个时候只需一个简单的操作系统还原，便可轻轻松松解决这一系列的问题。 系统的备份和还原有许多的工具可以使用，不过大部分都是需要安装的， 今天本人要介绍的是一款免安装的一键备份还原工具onekey<br><img src="https://attach.52pojie.cn/forum/201704/05/225950mvir2kc6zwukkppw.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950saq2l7djc7z9oolc.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950arrmt7tenrjyjr09.png" alt=""></p>
+<p>一键还原onekey 使用技巧</p>
+<p><a href="http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html</a></p>
+<p>系统还原后会保留激活的系统和office，不用担心还原问题！！！</p>
+<p>百度云下载：<a href="http://pan.baidu.com/s/1qXSWXQW" target="_blank" rel="external">http://pan.baidu.com/s/1qXSWXQW</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      最近搞了一个瘦客户机，准备拿来当做nas，或者路由，再或者BT机子。。。在此之前，它还是个xp系统，暂时没想要行动，所以就当个小xp用着，考虑到安全，折腾一下备份还原，太久没用过xp啦~~
+    
+    </summary>
+    
+    
+      <category term="还原" scheme="http://imayday.me/tags/%E8%BF%98%E5%8E%9F/"/>
+    
+      <category term="恢复" scheme="http://imayday.me/tags/%E6%81%A2%E5%A4%8D/"/>
+    
+      <category term="windows" scheme="http://imayday.me/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>记录利用免费的谷歌云搭建ss和bbr遇到的坑</title>

@@ -15,17 +15,21 @@
 
 
 
-<meta name="description" content="这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。 下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Eng">
-<meta name="keywords" content="shadowsocks,bbr,GCE">
+<meta name="description" content="最近搞了一个瘦客户机，准备拿来当做nas，或者路由，再或者BT机子。。。在此之前，它还是个xp系统，暂时没想要行动，所以就当个小xp用着，考虑到安全，折腾一下备份还原，太久没用过xp啦~~">
+<meta name="keywords" content="还原,恢复,windows">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录利用免费的谷歌云搭建ss和bbr遇到的坑">
-<meta property="og:url" content="http://imayday.me/2017/05/26/ss-bbr/index.html">
+<meta property="og:title" content="xp系统还原与恢复">
+<meta property="og:url" content="http://imayday.me/2017/05/27/ghost/index.html">
 <meta property="og:site_name" content="一只憨人">
-<meta property="og:description" content="这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。 下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Eng">
-<meta property="og:updated_time" content="2017-05-26T09:00:36.412Z">
+<meta property="og:description" content="最近搞了一个瘦客户机，准备拿来当做nas，或者路由，再或者BT机子。。。在此之前，它还是个xp系统，暂时没想要行动，所以就当个小xp用着，考虑到安全，折腾一下备份还原，太久没用过xp啦~~">
+<meta property="og:image" content="https://attach.52pojie.cn/forum/201704/05/225950mvir2kc6zwukkppw.png">
+<meta property="og:image" content="https://attach.52pojie.cn/forum/201704/05/225950saq2l7djc7z9oolc.png">
+<meta property="og:image" content="https://attach.52pojie.cn/forum/201704/05/225950arrmt7tenrjyjr09.png">
+<meta property="og:updated_time" content="2017-05-27T09:13:21.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录利用免费的谷歌云搭建ss和bbr遇到的坑">
-<meta name="twitter:description" content="这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。 下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Eng">
+<meta name="twitter:title" content="xp系统还原与恢复">
+<meta name="twitter:description" content="最近搞了一个瘦客户机，准备拿来当做nas，或者路由，再或者BT机子。。。在此之前，它还是个xp系统，暂时没想要行动，所以就当个小xp用着，考虑到安全，折腾一下备份还原，太久没用过xp啦~~">
+<meta name="twitter:image" content="https://attach.52pojie.cn/forum/201704/05/225950mvir2kc6zwukkppw.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>记录利用免费的谷歌云搭建ss和bbr遇到的坑 | 一只憨人</title>
+<title>xp系统还原与恢复 | 一只憨人</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -256,11 +260,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-ss-bbr" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ghost" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/26/ss-bbr/" class="article-date">
-      <time datetime="2017-05-26T08:11:12.000Z" itemprop="datePublished">2017-05-26</time>
+      <a href="/2017/05/27/ghost/" class="article-date">
+      <time datetime="2017-05-27T06:37:45.000Z" itemprop="datePublished">2017-05-27</time>
 </a>
 
 
@@ -275,7 +279,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      记录利用免费的谷歌云搭建ss和bbr遇到的坑
+      xp系统还原与恢复
     </h1>
   
 
@@ -286,7 +290,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GCE/">GCE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bbr/">bbr</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/恢复/">恢复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/还原/">还原</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -296,54 +300,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。<br>下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Engine，是 GCP 产品线里的一个主机产品。</p>
-<h2 id="本文前提条件"><a href="#本文前提条件" class="headerlink" title="本文前提条件"></a>本文前提条件</h2><ol>
-<li>有一个 Google 账号，没有的话可以注册一个。</li>
-<li>注册 GCP 免费试用需要用信用卡进行身份验证（只做验证，不会收费），所以你必须有一个 Visa/MasterCard 的信用卡才行。</li>
-</ol>
-<h2 id="GCP-注册以及创建服务器"><a href="#GCP-注册以及创建服务器" class="headerlink" title="GCP 注册以及创建服务器"></a>GCP 注册以及创建服务器</h2><p>要访问 Google 首先需要你能科学上网，但是这篇文章又是介绍如何科学上网的，好像有点鸡生蛋蛋生鸡的矛盾… 其实你可以去App Store搜索 V屁恩，找一个免费的下载后，通过签到等方式暂时领取一天或者几个小时的免费低速试用来完成下面的教程。</p>
-<h3 id="注册-GCP-免费试用"><a href="#注册-GCP-免费试用" class="headerlink" title="注册 GCP 免费试用"></a>注册 GCP 免费试用</h3><ol>
-<li>登录Google账号后使用这个链接来注册 <a href="https://cloud.google.com/free/" target="_blank" rel="external">https://cloud.google.com/free/</a> ，在打开的页面中点击<code>Try it Free</code>。</li>
-<li>接受条款，并点击<code>同意并继续</code>。</li>
-<li>在页面中填入你的信息：<ul>
-<li>账号类型：个人</li>
-<li>名称和地址：填写你的地址、电话等</li>
-<li>付款方式：添加一个信用卡。这个信用卡将会用来验证身份，防止GCP被滥用。</li>
-<li>点击 开始免费使用 完成注册</li>
-</ul>
-</li>
-</ol>
-<p>在后面的页面中，如果你能看到页面顶部有一个“礼物” 的小图标，说明已经获取了试用金。</p>
-<h3 id="新建主机"><a href="#新建主机" class="headerlink" title="新建主机"></a>新建主机</h3><ol>
-<li>在左侧菜单中导航到 计算引擎 → VM 实例</li>
-<li>点击加号按钮，创建一个 VM 实例。<ul>
-<li>名称：随意填入一个易记得名字</li>
-<li>地区：建议选择 asia-east1-* 三个中的任意一个，这个机房是在台湾，国内的延迟只有 50~70ms，简直快到飞起。</li>
-<li>机器类型：选择 “小型” (1.7G 内存) 就可以了。默认选中的 3.75G 的内存其实用不完。</li>
-<li>启动磁盘：默认的Debian 8就可以，推荐 Ubuntu 16.04 LTS。另外为了防止将来磁盘不够用，你可以点击右下角的更改，大小里使用 20G 或者 30G。</li>
-<li>防火墙：选中 “允许HTTP流量” 和 ”允许HTTPS流量“<br>点击创建，稍等几分钟就会创建完毕，现在打开 HyperApp 开始配置这台服务器吧。<h3 id="连接GCE"><a href="#连接GCE" class="headerlink" title="连接GCE"></a>连接GCE</h3>GCE是不提供root账户登录的，这点与一般的运营商有所区别，用户需要自己搞ssh，具体可以参阅<a href="https://www.91yun.org/archives/2297" target="_blank" rel="external">GCE的连接</a>。<h2 id="安装BBR"><a href="#安装BBR" class="headerlink" title="安装BBR"></a>安装BBR</h2>&emsp;&emsp;最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，最新的 4.11 版内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。<br>根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</li>
-</ul>
-</li>
-</ol>
-<p>这里引用了<a href="https://teddysun.com/489.html" target="_blank" rel="external">一键安装最新内核并开启 BBR 脚本</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</div><div class="line">chmod +x bbr.sh</div><div class="line">./bbr.sh</div></pre></td></tr></table></figure></p>
-<p>验证安装成功执行</p>
-<pre><code>lsmod | grep bbr
-</code></pre><p>返回值有 tcp_bbr 模块即说明bbr已启动。</p>
-<p>##安装shadowsocks<br>这里有很多可选，具体参见<a href="https://shadowsocks.be/" target="_blank" rel="external">ss非官方网站</a>,此处采用了占资源最小的ss-libev版本。<br>坑就在这里，应该是开启了bbr后，系统一些东西被更改了。</p>
-<h3 id="wget-unable-to-resolve-host-address"><a href="#wget-unable-to-resolve-host-address" class="headerlink" title="wget: unable to resolve host address"></a>wget: unable to resolve host address</h3><p>wget 用不了了，解析不了脚本地址，解决方法为添加dns</p>
-<ol>
-<li>登入root（VPS）。</li>
-<li>进入/etc/resolv.conf。</li>
-<li>修改内容为下</li>
-</ol>
-<blockquote>
-<p>nameserver 8.8.8.8 #google域名服务器</p>
-<p>nameserver 8.8.4.4 #google域名服务器</p>
-</blockquote>
-<h3 id="Read-only-file-system"><a href="#Read-only-file-system" class="headerlink" title="Read-only file system"></a>Read-only file system</h3><p>刚解决了dns，又出现系统文件只读的问题。。。很简单 只需一步</p>
-<pre><code>mount -o  remount rw /
-</code></pre><h3 id="继续安装"><a href="#继续安装" class="headerlink" title="继续安装"></a>继续安装</h3><p>接下来就可以按照脚本正常安装了。</p>
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h2><p>尽情的享受吧。我的电信环境，实测ping50ms，非常好。</p>
+        <p>&emsp;&emsp;操作系统的备份和还原对任何人来说都是非常重要的， 比如说，电脑长期使用，导致启动或者运行都特别的慢，C盘占用了大量的垃圾文件，这个时候手动清理起来会特别的麻烦，或者说由于操作上的失误，导致系统崩溃， 这个时候如果平时有做系统备份，这个时候只需一个简单的操作系统还原，便可轻轻松松解决这一系列的问题。 系统的备份和还原有许多的工具可以使用，不过大部分都是需要安装的， 今天本人要介绍的是一款免安装的一键备份还原工具onekey<br><img src="https://attach.52pojie.cn/forum/201704/05/225950mvir2kc6zwukkppw.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950saq2l7djc7z9oolc.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950arrmt7tenrjyjr09.png" alt=""></p>
+<p>一键还原onekey 使用技巧</p>
+<p><a href="http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html</a></p>
+<p>系统还原后会保留激活的系统和office，不用担心还原问题！！！</p>
+<p>百度云下载：<a href="http://pan.baidu.com/s/1qXSWXQW" target="_blank" rel="external">http://pan.baidu.com/s/1qXSWXQW</a></p>
 
       
     </div>
@@ -352,13 +313,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/27/ghost/">xp系统还原与恢复</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
-        <p><span>发布时间:</span>2017-05-26, 16:11:12</p>
-        <p><span>最后更新:</span>2017-05-26, 17:00:36</p>
+        <p><span>发布时间:</span>2017-05-27, 14:37:45</p>
+        <p><span>最后更新:</span>2017-05-27, 17:13:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/26/ss-bbr/" title="记录利用免费的谷歌云搭建ss和bbr遇到的坑">http://imayday.me/2017/05/26/ss-bbr/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/26/ss-bbr/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/27/ghost/" title="xp系统还原与恢复">http://imayday.me/2017/05/27/ghost/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/27/ghost/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -371,16 +332,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/27/ghost/">
-                    xp系统还原与恢复
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/10/movewordpress/">
-                    史上最全wordpress搬家教程
+                <a href="/2017/05/26/ss-bbr/">
+                    记录利用免费的谷歌云搭建ss和bbr遇到的坑
                 </a>
             </div>
         
@@ -392,7 +347,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文前提条件"><span class="toc-number">1.</span> <span class="toc-text">本文前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCP-注册以及创建服务器"><span class="toc-number">2.</span> <span class="toc-text">GCP 注册以及创建服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-GCP-免费试用"><span class="toc-number">2.1.</span> <span class="toc-text">注册 GCP 免费试用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建主机"><span class="toc-number">2.2.</span> <span class="toc-text">新建主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接GCE"><span class="toc-number">2.3.</span> <span class="toc-text">连接GCE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装BBR"><span class="toc-number">3.</span> <span class="toc-text">安装BBR</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wget-unable-to-resolve-host-address"><span class="toc-number">3.1.</span> <span class="toc-text">wget: unable to resolve host address</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-only-file-system"><span class="toc-number">3.2.</span> <span class="toc-text">Read-only file system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续安装"><span class="toc-number">3.3.</span> <span class="toc-text">继续安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大功告成"><span class="toc-number">4.</span> <span class="toc-text">大功告成</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -428,7 +383,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"记录利用免费的谷歌云搭建ss和bbr遇到的坑　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"xp系统还原与恢复　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -447,8 +402,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://imayday.me/2017/05/26/ss-bbr/';
-            this.page.identifier = '2017/05/26/ss-bbr/';
+            this.page.url = 'http://imayday.me/2017/05/27/ghost/';
+            this.page.identifier = '2017/05/27/ghost/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -470,15 +425,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/27/ghost/" title="上一篇: xp系统还原与恢复">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/10/movewordpress/" title="下一篇: 史上最全wordpress搬家教程">
+            <a href="/2017/05/26/ss-bbr/" title="下一篇: 记录利用免费的谷歌云搭建ss和bbr遇到的坑">
                 <i class="fa fa-angle-right"></i>
             </a>
         
