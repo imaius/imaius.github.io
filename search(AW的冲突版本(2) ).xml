@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[解决docker安装后出现的小问题]]></title>
+      <url>/2017/06/11/dockerdaemon/</url>
+      <content type="html"><![CDATA[<h3 id="emsp-emsp-解决docker安装后出现Cannot-connect-to-the-Docker-daemon"><a href="#emsp-emsp-解决docker安装后出现Cannot-connect-to-the-Docker-daemon" class="headerlink" title="&emsp;&emsp;解决docker安装后出现Cannot connect to the Docker daemon."></a>&emsp;&emsp;解决docker安装后出现Cannot connect to the Docker daemon.</h3><p>&emsp;&emsp;解决方案:</p>
+<ol>
+<li>su root # 先切换到root用户</li>
+<li>执行以下命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">systemctl enable docker # 开机自动启动docker</div><div class="line"></div><div class="line">systemctl start docker # 启动docker</div><div class="line"></div><div class="line">systemctl restart docker # 重启dokcer</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;完美解决</p>
+<h3 id="出现Unable-to-find-image-‘hello-world-latest’-locally"><a href="#出现Unable-to-find-image-‘hello-world-latest’-locally" class="headerlink" title="出现Unable to find image ‘hello-world:latest’ locally"></a>出现Unable to find image ‘hello-world:latest’ locally</h3><p>这是网络问题，解决方法为添加dns</p>
+<ol>
+<li>登入root（VPS）。</li>
+<li>进入/etc/resolv.conf。</li>
+<li>修改内容为下</li>
+</ol>
+<blockquote>
+<p>nameserver 8.8.8.8 #google域名服务器</p>
+<p>nameserver 8.8.4.4 #google域名服务器</p>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[centos7系统更换内核]]></title>
+      <url>/2017/06/07/uname/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;前面写过centos7配合bbr搭建ssr，效果挺不错的，今天重启了机器，原因未知发现bbr失效了，查询内核发现不是最新的了，在此记录更换内核的方式。</p>
+<p>&emsp;&emsp;使用下面的命令查看已经安装的内核：</p>
+<pre><code>awk -F\&apos; &apos;$1==&quot;menuentry &quot; {print i++ &quot; : &quot; $2}&apos; /etc/grub2.cfg
+</code></pre><p>我的机子得到如下结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">0 : CentOS Linux (3.10.0-514.21.1.el7.x86_64) 7 (Core)</div><div class="line">1 : CentOS Linux 7 Rescue fbd114dd84e946f3b40ba5d306c649f2 (4.11.3-1.el7.elrepo.x86_64)</div><div class="line">2 : CentOS Linux (4.11.3-1.el7.elrepo.x86_64) 7 (Core)</div><div class="line">3 : CentOS Linux (3.10.0-514.16.1.el7.x86_64) 7 (Core)</div><div class="line">4 : CentOS Linux (3.10.0-514.el7.x86_64) 7 (Core)</div><div class="line">5 : CentOS Linux (0-rescue-e4293fb2b8c749e391cbb8733a6a43f0) 7 (Core)</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;把CentOS Linux (4.11.3-1.el7.elrepo.x86_64) 7 (Core)作为启用内核</p>
+<pre><code>grub2-set-default 2
+</code></pre><p>&emsp;&emsp;然后reboot即可。重启后</p>
+<pre><code>lsmod | grep bbr
+</code></pre><p>&emsp;&emsp;得到</p>
+<pre><code>tcp_bbr                16384  24 
+</code></pre><p>&emsp;&emsp;发现bbr开启了。至此恢复正常使用。</p>
+<p>&emsp;&emsp;如果你想要删除旧的内核可以如下操作：</p>
+<p>查看当前内核</p>
+<pre><code>rpm -qa | grep kernel
+</code></pre><p>然后直接yum删除</p>
+<pre><code>yum -y remove &apos;内核名&apos;
+</code></pre><p>值得注意的是，如此操作过后需要重新操作一下开始的步骤，因为序号可能变动了。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> centos </tag>
+            
+            <tag> 内核 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[xp系统还原与恢复]]></title>
+      <url>/2017/05/27/ghost/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;操作系统的备份和还原对任何人来说都是非常重要的， 比如说，电脑长期使用，导致启动或者运行都特别的慢，C盘占用了大量的垃圾文件，这个时候手动清理起来会特别的麻烦，或者说由于操作上的失误，导致系统崩溃， 这个时候如果平时有做系统备份，这个时候只需一个简单的操作系统还原，便可轻轻松松解决这一系列的问题。 系统的备份和还原有许多的工具可以使用，不过大部分都是需要安装的， 今天本人要介绍的是一款免安装的一键备份还原工具onekey<br><img src="https://attach.52pojie.cn/forum/201704/05/225950mvir2kc6zwukkppw.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950saq2l7djc7z9oolc.png" alt=""><img src="https://attach.52pojie.cn/forum/201704/05/225950arrmt7tenrjyjr09.png" alt=""></p>
+<p>一键还原onekey 使用技巧</p>
+<p><a href="http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ca2d939d2d50afeb6c31ceab.html</a></p>
+<p>系统还原后会保留激活的系统和office，不用担心还原问题！！！</p>
+<p>百度云下载：<a href="http://pan.baidu.com/s/1qXSWXQW" target="_blank" rel="external">http://pan.baidu.com/s/1qXSWXQW</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 还原 </tag>
+            
+            <tag> 恢复 </tag>
+            
+            <tag> windows </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[记录利用免费的谷歌云搭建ss和bbr遇到的坑]]></title>
+      <url>/2017/05/26/ss-bbr/</url>
+      <content type="html"><![CDATA[<p>这篇文章将会介绍如何获取由 Google 提供的一年 $300 美金的试用金，然后搭建一个低延迟超高速的科学上网环境。网络延迟基本在50ms左右，并且可以流畅观看 Youtube 4K 视频。本文不需要读者有较深的技术背景，全部过程都可视化、自动化完成。<br>下文用 GCP 代表 Google Cloud Platform，指 Google 的整个云平台。GCE 是指 Google Cloud Engine，是 GCP 产品线里的一个主机产品。</p>
+<h2 id="本文前提条件"><a href="#本文前提条件" class="headerlink" title="本文前提条件"></a>本文前提条件</h2><ol>
+<li>有一个 Google 账号，没有的话可以注册一个。</li>
+<li>注册 GCP 免费试用需要用信用卡进行身份验证（只做验证，不会收费），所以你必须有一个 Visa/MasterCard 的信用卡才行。</li>
+</ol>
+<h2 id="GCP-注册以及创建服务器"><a href="#GCP-注册以及创建服务器" class="headerlink" title="GCP 注册以及创建服务器"></a>GCP 注册以及创建服务器</h2><p>要访问 Google 首先需要你能科学上网，但是这篇文章又是介绍如何科学上网的，好像有点鸡生蛋蛋生鸡的矛盾… 其实你可以去App Store搜索 V屁恩，找一个免费的下载后，通过签到等方式暂时领取一天或者几个小时的免费低速试用来完成下面的教程。</p>
+<h3 id="注册-GCP-免费试用"><a href="#注册-GCP-免费试用" class="headerlink" title="注册 GCP 免费试用"></a>注册 GCP 免费试用</h3><ol>
+<li>登录Google账号后使用这个链接来注册 <a href="https://cloud.google.com/free/" target="_blank" rel="external">https://cloud.google.com/free/</a> ，在打开的页面中点击<code>Try it Free</code>。</li>
+<li>接受条款，并点击<code>同意并继续</code>。</li>
+<li>在页面中填入你的信息：<ul>
+<li>账号类型：个人</li>
+<li>名称和地址：填写你的地址、电话等</li>
+<li>付款方式：添加一个信用卡。这个信用卡将会用来验证身份，防止GCP被滥用。</li>
+<li>点击 开始免费使用 完成注册</li>
+</ul>
+</li>
+</ol>
+<p>在后面的页面中，如果你能看到页面顶部有一个“礼物” 的小图标，说明已经获取了试用金。</p>
+<h3 id="新建主机"><a href="#新建主机" class="headerlink" title="新建主机"></a>新建主机</h3><ol>
+<li>在左侧菜单中导航到 计算引擎 → VM 实例</li>
+<li>点击加号按钮，创建一个 VM 实例。<ul>
+<li>名称：随意填入一个易记得名字</li>
+<li>地区：建议选择 asia-east1-* 三个中的任意一个，这个机房是在台湾，国内的延迟只有 50~70ms，简直快到飞起。</li>
+<li>机器类型：选择 “小型” (1.7G 内存) 就可以了。默认选中的 3.75G 的内存其实用不完。</li>
+<li>启动磁盘：默认的Debian 8就可以，推荐 Ubuntu 16.04 LTS。另外为了防止将来磁盘不够用，你可以点击右下角的更改，大小里使用 20G 或者 30G。</li>
+<li>防火墙：选中 “允许HTTP流量” 和 ”允许HTTPS流量“<br>点击创建，稍等几分钟就会创建完毕，现在打开 HyperApp 开始配置这台服务器吧。<h3 id="连接GCE"><a href="#连接GCE" class="headerlink" title="连接GCE"></a>连接GCE</h3>GCE是不提供root账户登录的，这点与一般的运营商有所区别，用户需要自己搞ssh，具体可以参阅<a href="https://www.91yun.org/archives/2297" target="_blank" rel="external">GCE的连接</a>。<h2 id="安装BBR"><a href="#安装BBR" class="headerlink" title="安装BBR"></a>安装BBR</h2>&emsp;&emsp;最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，最新的 4.11 版内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。<br>根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</li>
+</ul>
+</li>
+</ol>
+<p>这里引用了<a href="https://teddysun.com/489.html" target="_blank" rel="external">一键安装最新内核并开启 BBR 脚本</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</div><div class="line">chmod +x bbr.sh</div><div class="line">./bbr.sh</div></pre></td></tr></table></figure></p>
+<p>验证安装成功执行</p>
+<pre><code>lsmod | grep bbr
+</code></pre><p>返回值有 tcp_bbr 模块即说明bbr已启动。</p>
+<p>##安装shadowsocks<br>这里有很多可选，具体参见<a href="https://shadowsocks.be/" target="_blank" rel="external">ss非官方网站</a>,此处采用了占资源最小的ss-libev版本。<br>坑就在这里，应该是开启了bbr后，系统一些东西被更改了。</p>
+<h3 id="wget-unable-to-resolve-host-address"><a href="#wget-unable-to-resolve-host-address" class="headerlink" title="wget: unable to resolve host address"></a>wget: unable to resolve host address</h3><p>wget 用不了了，解析不了脚本地址，解决方法为添加dns</p>
+<ol>
+<li>登入root（VPS）。</li>
+<li>进入/etc/resolv.conf。</li>
+<li>修改内容为下</li>
+</ol>
+<blockquote>
+<p>nameserver 8.8.8.8 #google域名服务器</p>
+<p>nameserver 8.8.4.4 #google域名服务器</p>
+</blockquote>
+<h3 id="Read-only-file-system"><a href="#Read-only-file-system" class="headerlink" title="Read-only file system"></a>Read-only file system</h3><p>刚解决了dns，又出现系统文件只读的问题。。。很简单 只需一步</p>
+<pre><code>mount -o  remount rw /
+</code></pre><h3 id="继续安装"><a href="#继续安装" class="headerlink" title="继续安装"></a>继续安装</h3><p>接下来就可以按照脚本正常安装了。</p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h2><p>尽情的享受吧。我的电信环境，实测ping50ms，非常好。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> shadowsocks </tag>
+            
+            <tag> bbr </tag>
+            
+            <tag> GCE </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[史上最全wordpress搬家教程]]></title>
+      <url>/2017/05/10/movewordpress/</url>
+      <content type="html"><![CDATA[<p>个人原因需要给网站搬家到新的服务器，拷贝文件、导出数据库这些基本的就不说了，按照网上的流程走完后，始终不能达到效果！<br>折腾了一下午总算搞定，下面列出用到的工具：</p>
+<p>1.wp clone by WP Academy 插件。</p>
+<p>这是一个很方便的WordPress克隆插件，你不需要填写任何FTP或者数据库信息，就可以实现网站备份、恢复、克隆。<br>WP Clone 在备份时，会自动将网站的 MySQL数据库 下载到主机空间，并且和 wp-content 目录下的所有文件（主题、插件、语言包、上传的文件等），一起打包为 .zip 格式的压缩包，存放在你的主机空间中。<br>你可以直接在该插件的设置页面，选择已有的 .zip 压缩包，进行恢复；<br>也可以在另一个新的WordPress站点中，安装这个 WP Clone 插件，然后填写刚才备份的 .zip 压缩包的完整访问地址，即可克隆旧站数据和文件到新站。</p>
+<p>2.wordpress move插件。</p>
+<p>3.wordpress主程序。</p>
+<p>准备工作是基础，流程才是核心！</p>
+<p>1。首先去新站点部署，各种信息都随意，只要能打开wordpress后台就可以。</p>
+<p>2。原网站以及新站点，都需要在wordpress后台搜索下载插件 wp clone by WP Academy ，或者直接从网址下载：<a href="http://wordpress.org/extend/plugins/wp-clone-by-wp-academy/。" target="_blank" rel="external">http://wordpress.org/extend/plugins/wp-clone-by-wp-academy/。</a></p>
+<p>3。原站点备份，生成url，这个url等下非常重要。</p>
+<p>4。新站点后台中点击主题，检查是否有多个默认主题，如果只有一个主题，那么是服务器环境禁用了 scandir函数导致。</p>
+<p>解决WordPress主题无法识别的方法：</p>
+<p>找到 php.ini，一般在服务器的 /usr/local/php/etc 目录下（有权限的FTP账户可以操作，且一般是这个位置）；</p>
+<p>打开 php.ini，查找其中的“disable_funcions”字样，找到并删除紧随其后的“scandir”，最后保存该文件；</p>
+<p>重启服务器的php服务后方可生效（不懂的话就直接通过管理后台重启服务器也行）。</p>
+<p>5。新站点可以正常显示主题后，原站点建议切换为默认主题，新站点也用同样的主题，这样转移站点不容易出错！ 这是技巧！~~</p>
+<p>6。新站点wp clone by WP Academy 插件  输入上文中的url，开始转移。大功告成~！值得注意的是，一些信息比如管理员后台的信息还是之前站点的！这也是我说新站点信息随便填只要能到达后台管理地址就行，那些信息在转移后都被覆盖了！</p>
+<p>7。关于插件 wordpress move 这个插件是用来方便更改域名的，而它提供的转移功能个人认为不够方便，需要自己配置ftp后才可以。</p>
+<p>大功告成！</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> wordpress </tag>
+            
+            <tag> 搬家 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于wordpress主题中Autoptimize插件的报错]]></title>
+      <url>/2017/05/10/Autoptimize/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;Autoptimize，从名字上看就是Auto＋Optimize，自动优化。现在来说我们优化Wordpress的方法有很多，常规的前端优化方法，如压缩图片、合并压缩js文件和css文件、使用七牛cdn加速等。如果是服务器的优化一般来说就是缓存了。</p>
+<p>&emsp;&emsp;博主用的主题，在安装并启用这个插件后，速度是有明显提升，但是偶然之间f12看了一下网页，发现有报错提示。经过排查发现这种错误源自于js文件的压缩。</p>
+<p>&emsp;&emsp;建议有问题的你，排除法来排查问题，根据报错位置前后关键词去搜索自己的主题文件，善用”Exclude scripts from Autoptimize”这个功能。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> wordpres </tag>
+            
+            <tag> Autoptimize </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[fiddlercore C#程序参考]]></title>
+      <url>/2017/05/10/fiddlercore/</url>
+      <content type="html"><![CDATA[<h3 id="截获请求"><a href="#截获请求" class="headerlink" title="截获请求"></a>截获请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Fiddler.FiddlerApplication.BeforeRequest += delegate(Fiddler.Session oS)</div><div class="line">&#123;</div><div class="line">oS.bBufferResponse = true;</div><div class="line">HTTPRequestHeaders rHeads = oS.oRequest.headers;</div><div class="line"></div><div class="line">if (oS.fullUrl == &quot;http://www.sufeinet.com/&quot;)</div><div class="line">&#123;</div><div class="line">cookie = rHeads.AllValues(&quot;cookie&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="截获响应"><a href="#截获响应" class="headerlink" title="截获响应"></a>截获响应</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">static void FiddlerApplication_BeforeResponse(Fiddler.Session oSession)</div><div class="line">&#123;</div><div class="line">if (oSession.fullUrl == &quot;http://www.sufeinet.com/&quot;)</div><div class="line">&#123;</div><div class="line">//body为响应的数据</div><div class="line">string body = oSession.GetResponseBodyAsString();</div><div class="line">oSession.utilDecodeResponse();</div><div class="line">//修改响应</div><div class="line">oSession.utilSetResponseBody(&quot;浏览器请求时发送的cookie:&quot; + cookie + &quot; Hello world!&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="网页参考-http-blog-csdn-net-zhang116868-article-details-49406599"><a href="#网页参考-http-blog-csdn-net-zhang116868-article-details-49406599" class="headerlink" title="网页参考 http://blog.csdn.net/zhang116868/article/details/49406599"></a>网页参考 <a href="http://blog.csdn.net/zhang116868/article/details/49406599" target="_blank" rel="external">http://blog.csdn.net/zhang116868/article/details/49406599</a></h3><h3 id="网页参考-http-blog-csdn-net-caicheng-119-article-details-51408213"><a href="#网页参考-http-blog-csdn-net-caicheng-119-article-details-51408213" class="headerlink" title="网页参考 http://blog.csdn.net/caicheng_119/article/details/51408213"></a>网页参考 <a href="http://blog.csdn.net/caicheng_119/article/details/51408213" target="_blank" rel="external">http://blog.csdn.net/caicheng_119/article/details/51408213</a></h3><h3 id="官方demo"><a href="#官方demo" class="headerlink" title="官方demo"></a>官方demo</h3><p><a href="http://thebot.net/threads/c-source-fiddler-core-example-https-recaptcha.283759/" target="_blank" rel="external">http://thebot.net/threads/c-source-fiddler-core-example-https-recaptcha.283759/</a><br><a href="http://fiddler.wikidot.com/fiddlercore-demo" target="_blank" rel="external">http://fiddler.wikidot.com/fiddlercore-demo</a><br><a href="http://fiddler.wikidot.com/fiddlercore-demo2" target="_blank" rel="external">http://fiddler.wikidot.com/fiddlercore-demo2</a></p>
+<h3 id="最终版本！"><a href="#最终版本！" class="headerlink" title="最终版本！"></a>最终版本！</h3><ol>
+<li>成功截获小猪授权!</li>
+</ol>
+<p>&emsp;&emsp;a. 通杀版本，截获response 改为”小猪正版”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">using Fiddler;</div><div class="line">using System.IO;</div><div class="line"></div><div class="line">namespace Hanren</div><div class="line">&#123;</div><div class="line">    class Program</div><div class="line">    &#123;</div><div class="line">        static void Main(string[] args)</div><div class="line">        &#123;</div><div class="line">            Fiddler.FiddlerApplication.BeforeRequest += delegate (Fiddler.Session oS) &#123;</div><div class="line">                oS.bBufferResponse = true;</div><div class="line">            &#125;;</div><div class="line">            Fiddler.FiddlerApplication.BeforeResponse += delegate (Fiddler.Session oS) &#123;</div><div class="line"></div><div class="line">                if (oS.fullUrl.Contains(&quot;www.maruweng.cn/xiaozhu/cx.php?user=&quot;))</div><div class="line">                &#123;</div><div class="line">                    oS.utilDecodeResponse();</div><div class="line">                    oS.utilSetResponseBody(&quot;小猪正版&quot;);</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);</div><div class="line">            Console.WriteLine(&quot;开始破解...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Startup(8877, true, true);</div><div class="line">            Console.WriteLine(&quot;Hit CTRL+C to end session.&quot;);</div><div class="line">            Object forever = new Object();</div><div class="line">            lock (forever)</div><div class="line">            &#123;</div><div class="line">                System.Threading.Monitor.Wait(forever);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)</div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(&quot;Shutting down...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Shutdown();</div><div class="line">            System.Threading.Thread.Sleep(750);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp; b. 授权版，截获request 更改host  path和query不变。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">using Fiddler;</div><div class="line">using System.IO;</div><div class="line"></div><div class="line">namespace Hanren</div><div class="line">&#123;</div><div class="line">    class Program</div><div class="line">    &#123;</div><div class="line">        static void Main(string[] args)</div><div class="line">        &#123;</div><div class="line">            Fiddler.FiddlerApplication.BeforeRequest += delegate (Fiddler.Session oS) &#123;</div><div class="line">                oS.bBufferResponse = true;</div><div class="line">                if (oS.fullUrl.Contains(&quot;www.maruweng.cn/xiaozhu/cx.php?user=&quot;))</div><div class="line">                &#123;</div><div class="line">                    oS.host = &quot;sqq.52mayday.cn&quot;;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);</div><div class="line">            Console.WriteLine(&quot;开始破解...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Startup(8877, true, true);</div><div class="line">            Console.WriteLine(&quot;Hit CTRL+C to end session.&quot;);</div><div class="line">            Object forever = new Object();</div><div class="line">            lock (forever)</div><div class="line">            &#123;</div><div class="line">                System.Threading.Monitor.Wait(forever);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)</div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(&quot;Shutting down...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Shutdown();</div><div class="line">            System.Threading.Thread.Sleep(750);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;2. 莫帆配置 感谢毒枭提供的授权QQ与key！犹豫配置均为response body，顾采用截获更改request来过授权！</p>
+<p>&emsp;&emsp;a. 最终版，采用request断点  然后replace pathANDquery 中的关键字 最后修改request为host+pathANDquery。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">using Fiddler;</div><div class="line">using System.IO;</div><div class="line"></div><div class="line">namespace Hanren</div><div class="line">&#123;</div><div class="line">    class Program</div><div class="line">    &#123;</div><div class="line">        static void Main(string[] args)</div><div class="line">        &#123;</div><div class="line">            Fiddler.FiddlerApplication.BeforeRequest += delegate (Fiddler.Session oS) &#123;</div><div class="line">                oS.bBufferResponse = true;</div><div class="line">                if (oS.fullUrl.Contains(&quot;cfrobotselfnum=3490526368&quot;))</div><div class="line">                &#123;</div><div class="line">                    string url = oS.fullUrl;</div><div class="line">                    string p = oS.PathAndQuery.Replace(&quot;3490526368&quot;, &quot;442992767&quot;);</div><div class="line">                    oS.url = oS.host+p;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);</div><div class="line">            Console.WriteLine(&quot;开始破解...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Startup(8877, true, true);</div><div class="line">            Console.WriteLine(&quot;请按 CTRL+C 以终止程序！&quot;);</div><div class="line">            Object forever = new Object();</div><div class="line">            lock (forever)</div><div class="line">            &#123;</div><div class="line">                System.Threading.Monitor.Wait(forever);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)</div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(&quot;停止破解中...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Shutdown();</div><div class="line">            System.Threading.Thread.Sleep(750);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;b. 弯路，不知道原因，此版虽然最终p为正确地址，但是却不能发出请求。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">using System.Collections.Generic;</div><div class="line">using System.Linq;</div><div class="line">using System.Text;</div><div class="line">using System.Threading.Tasks;</div><div class="line"></div><div class="line">using Fiddler;</div><div class="line">using System.IO;</div><div class="line"></div><div class="line">namespace Hanren</div><div class="line">&#123;</div><div class="line">    class Program</div><div class="line">    &#123;</div><div class="line">        static void Main(string[] args)</div><div class="line">        &#123;</div><div class="line">            Fiddler.FiddlerApplication.BeforeRequest += delegate (Fiddler.Session oS) &#123;</div><div class="line">                oS.bBufferResponse = true;</div><div class="line">                if (oS.fullUrl.Contains(&quot;cfrobotselfnum=3490526368&amp;amp;&quot;))</div><div class="line">                &#123;</div><div class="line">                    string url = oS.fullUrl;</div><div class="line">                    Console.WriteLine(url);</div><div class="line">                    string p = oS.fullUrl.Replace(&quot;cfrobotselfnum=3490526368&amp;amp;&quot;, &quot;cfrobotselfnum=260001721&amp;amp;&quot;);</div><div class="line">                    Console.WriteLine(p);</div><div class="line">                    oS.url = p;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);</div><div class="line">            Console.WriteLine(&quot;开始破解...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Startup(8877, true, true);</div><div class="line">            Console.WriteLine(&quot;Hit CTRL+C to end session.&quot;);</div><div class="line">            Object forever = new Object();</div><div class="line">            lock (forever)</div><div class="line">            &#123;</div><div class="line">                System.Threading.Monitor.Wait(forever);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)</div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(&quot;Shutting down...&quot;);</div><div class="line">            Fiddler.FiddlerApplication.Shutdown();</div><div class="line">            System.Threading.Thread.Sleep(750);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> c# </tag>
+            
+            <tag> fiddlercore </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[php下载地址递增代码]]></title>
+      <url>/2017/05/10/phpincrse/</url>
+      <content type="html"><![CDATA[<p>在线运行地址：  <a href="http://www.shucunwang.com/RunCode/php/" target="_blank" rel="external">http://www.shucunwang.com/RunCode/php/</a><br>代码：</p>
+<pre class="lang:php decode:true ">&lt;?php
+for($i=100;$i&lt;=559;$i++)echo "http://www.sxmbsd.com/SRKL/DM/$i.jpg\r\n"
+?&gt;</pre>
+
+<p>运行结果：<br><a href="http://www.sxmbsd.com/SRKL/DM/100.jpg" target="_blank" rel="external">http://www.sxmbsd.com/SRKL/DM/100.jpg</a><br><a href="http://www.sxmbsd.com/SRKL/DM/101.jpg" target="_blank" rel="external">http://www.sxmbsd.com/SRKL/DM/101.jpg</a><br>…<br>…<br>…<br><a href="http://www.sxmbsd.com/SRKL/DM/558.jpg" target="_blank" rel="external">http://www.sxmbsd.com/SRKL/DM/558.jpg</a><br><a href="http://www.sxmbsd.com/SRKL/DM/559.jpg" target="_blank" rel="external">http://www.sxmbsd.com/SRKL/DM/559.jpg</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> php </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[记一次关于KODExpore版权修改过程]]></title>
+      <url>/2017/05/10/KODExpore/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。</p>
+<h3 id="1-footer部分"><a href="#1-footer部分" class="headerlink" title="1.footer部分"></a>1.footer部分</h3><p>&emsp;&emsp;这一部分疑似检索页内关键词，必须存在版权信息。我们巧妙的利用footer的bug绕过这个。<br>文件位于 /template/common/footer.html。打开文件，很明显的可以看到这行代码，这就是版权信息。</p>
+<pre><code>&lt;pre class=&quot;lang:default decode:true &quot;&gt;echo $L[&apos;copyright_pre&apos;].&apos; v&apos;.KOD_VERSION.&apos; | &apos;.$L[&apos;copyright_info&apos;];&lt;/pre&gt;
+</code></pre><p>&emsp;&emsp;我们在前面一行加上我们要设置的信息即可！效果如下！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true&quot;&gt;echo  &quot;All rights reserved.Powered by hhh v3.41 | Copyright ©&amp;lt;p&amp;gt;&amp;amp;nbsp&amp;lt;/p&amp;gt;&quot; ;</div><div class="line">echo $L[&apos;copyright_pre&apos;].&apos; v&apos;.KOD_VERSION.&apos; | &apos;.$L[&apos;copyright_info&apos;];&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="2-右上角个人信息部分"><a href="#2-右上角个人信息部分" class="headerlink" title="2.右上角个人信息部分"></a>2.右上角个人信息部分</h3><p>&emsp;&emsp;这部分文件在 /template/common/navbar.html</p>
+<p>&emsp;&emsp;找到以下代码并将其注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;&amp;lt;li class=&quot;menu_system_about&quot;&amp;gt;&amp;lt;a href=&quot;javascript:core.setting(&apos;about&apos;);&quot;&amp;gt;&amp;lt;i class=&quot;font-icon icon-info-sign&quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;?php echo $L[&apos;setting_about&apos;];?&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;</div><div class="line">&amp;lt;li role=&quot;presentation&quot; class=&quot;divider&quot;&amp;gt;&amp;lt;/li&amp;gt;&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="3-系统设置内"><a href="#3-系统设置内" class="headerlink" title="3.系统设置内"></a>3.系统设置内</h3><p>&emsp;&emsp;找到 /template/setting/index.php。把设置中的关于注释掉，也就是这段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;&amp;lt;a href=&quot;javascript:void(0);&quot; id=&quot;about&quot;&amp;gt;&amp;lt;i class=&quot;font-icon icon-info-sign&quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;?php echo $L[&apos;setting_about&apos;];?&amp;gt;&amp;lt;/a&amp;gt;&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="4-登录页面的footer"><a href="#4-登录页面的footer" class="headerlink" title="4.登录页面的footer"></a>4.登录页面的footer</h3><p>&emsp;&emsp;登录页面的footer也是没有被覆盖的，文件位于 /static/style/login.css 同下一条一样，修改.common_footer的position属性为fixed，并添加height：30px</p>
+<h3 id="5-其他"><a href="#5-其他" class="headerlink" title="5.其他"></a>5.其他</h3><p>&emsp;&emsp;本以为都改号了，结果躺下后用手机试了是发现footer悬在半空，而且原本的版权也显示出来了，所以找到了移动端的css文件，位于 /static/style/wap/app_explorer.css。修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;.common_footer&#123;bottom:0px;&#125;</div><div class="line">.common_footer&#123;position:fixed;height:20px;bottom:0px;&#125;</div><div class="line">&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
+<p>顺便说一下，pc端的默认css位于 /static/style/skin/base/app_explorer.css如有需要也可修改</p>
+<p>OK！大功告成~！这样就没有任何版权提示拉，以上纯属娱乐，并没有实质上修改版权，如果需要还是请支持正版吧！</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> KODExpore </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Linux命令行在su root后突然变成bash-4.1$的办法]]></title>
+      <url>/2017/05/10/linuxsuroot/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况</p>
+<p>&emsp;&emsp;输入各种命令都是不行的。。不过我找到了解决方法：</p>
+<p>&emsp;&emsp;1. 在根目录下建立root目录</p>
+<p>&emsp;&emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。<br>经测试是有效的，希望能帮助到你~</p>
+]]></content>
+      
+        <categories>
+            
+            <category> linux运维 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> 运维 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[更换电脑继续进行hexo写作]]></title>
+      <url>/2017/05/04/switch-computer/</url>
+      <content type="html"><![CDATA[<p>&emsp;&emsp;hexo是一个没有后台的主题框架，写作只能在本地，如果你想换电脑继续进行写作，那么你可以参考下面的方法：</p>
+<h3 id="1-从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建："><a href="#1-从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建：" class="headerlink" title="1.从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建："></a>1.从官网Git下载git，在新电脑上安装，因为https速度慢，而且每次都要输入口令，常用的是使用ssh。使用下面方法创建：</h3><ul>
+<li>打开git bash，在用户主目录下运行：ssh-keygen -t rsa -C “youremail@example.com” 把其中的邮件地址换成自己的邮件地址，然后一路回车</li>
+<li>最后完成后，会在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥，千万不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</li>
+<li>登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容（千万不要粘贴成私钥了！），最后点击「Add SSH Key」，你就应该看到已经添加的Key。注意：不要在git版本库中运行ssh，然后又将它提交，这样就把密码泄露出去了。</li>
+</ul>
+<h3 id="2-下载Node-js，并安装"><a href="#2-下载Node-js，并安装" class="headerlink" title="2.下载Node.js，并安装"></a>2.下载Node.js，并安装</h3><h3 id="3-打开git-bash客户端，输入-npm-install-hexo-cli-g，开始安装hexo"><a href="#3-打开git-bash客户端，输入-npm-install-hexo-cli-g，开始安装hexo" class="headerlink" title="3.打开git bash客户端，输入 npm install hexo-cli -g，开始安装hexo"></a>3.打开git bash客户端，输入 npm install hexo-cli -g，开始安装hexo</h3><h3 id="4-下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。"><a href="#4-下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。" class="headerlink" title="4.下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。"></a>4.下面就将原来的文件拷贝到新电脑中，但是要注意哪些文件是必须的，哪些文件是可以删除的。</h3><ul>
+<li>讨论下哪些文件是必须拷贝的：首先是之前自己修改的文件，像站点配置_config.yml，theme文件夹里面的主题，以及source里面自己写的博客文件，这些肯定要拷贝的。除此之外，还有三个文件需要有，就是scaffolds文件夹（文章的模板）、package.json（说明使用哪些包）和.gitignore（限定在提交的时候哪些文件可以忽略）。其实，这三个文件不是我们修改的，所以即使丢失了，也没有关系，我们可以建立一个新的文件夹，然后在里面执行hexo init，就会生成这三个文件，我们只需要将它们拷贝过来使用即可。总结：_config.yml，theme/，source/，scaffolds/，package.json，.gitignore，是需要拷贝的。</li>
+<li>再讨论下哪些文件是不必拷贝的，或者说可以删除的：首先是.git文件，无论是在站点根目录下，还是主题目录下的.git文件，都可以删掉。然后是文件夹node_modules（在用npm install会重新生成），public（这个在用hexo g时会重新生成），.deploy_git文件夹（在使用hexo d时也会重新生成），db.json文件。其实上面这些文件也就是是.gitignore文件里面记载的可以忽略的内容。总结：.git/，node_modules/，public/，.deploy_git/，db.json文件需要删除。</li>
+</ul>
+<h3 id="5-在git-bash中切换目录到新拷贝的文件夹里，使用-npm-install-命令，进行模块安装。很明显我们这里没用hexo-init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo-init去整体初始化，如果不慎在此时用了hexo-init，则站点的配置文件-config-yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo-init。"><a href="#5-在git-bash中切换目录到新拷贝的文件夹里，使用-npm-install-命令，进行模块安装。很明显我们这里没用hexo-init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo-init去整体初始化，如果不慎在此时用了hexo-init，则站点的配置文件-config-yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo-init。" class="headerlink" title="5.在git bash中切换目录到新拷贝的文件夹里，使用 npm install 命令，进行模块安装。很明显我们这里没用hexo init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo init去整体初始化，如果不慎在此时用了hexo init，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo init。"></a>5.在git bash中切换目录到新拷贝的文件夹里，使用 npm install 命令，进行模块安装。很明显我们这里没用hexo init初始化，因为有的文件我们已经拷贝生成过来了，所以不必用hexo init去整体初始化，如果不慎在此时用了hexo init，则站点的配置文件_config.yml里面内容会被清空使用默认值，所以这一步一定要慎重，不要用hexo init。</h3><h3 id="6-安装其他的一些必要组件，如果在node-modules里面有的，就不要重复安装了："><a href="#6-安装其他的一些必要组件，如果在node-modules里面有的，就不要重复安装了：" class="headerlink" title="6.安装其他的一些必要组件，如果在node_modules里面有的，就不要重复安装了："></a>6.安装其他的一些必要组件，如果在node_modules里面有的，就不要重复安装了：</h3><ul>
+<li>为了使用hexo d来部署到git上，需要安装npm install hexo-deployer-git –save</li>
+<li>为了建立RSS订阅，需要安装npm install hexo-generator-feed –save</li>
+<li>为了建立站点地图，需要安装npm install hexo-generator-sitemap –save插件安装后，有的需要对配置文件_config.yml进行配置，具体怎么配置，可以参考上面插件在github主页上的具体说明</li>
+</ul>
+<h3 id="7-使用hexo-g，然后使用hexo-d进行部署，如果都没有出错，就转移成功了！"><a href="#7-使用hexo-g，然后使用hexo-d进行部署，如果都没有出错，就转移成功了！" class="headerlink" title="7.使用hexo g，然后使用hexo d进行部署，如果都没有出错，就转移成功了！"></a>7.使用hexo g，然后使用hexo d进行部署，如果都没有出错，就转移成功了！</h3>]]></content>
+      
+        
+        <tags>
+            
+            <tag> 建站 </tag>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[linux/windows/mac下的node.js的安装]]></title>
+      <url>/2017/05/02/install-nodejs/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[利用github配合hexo搭建博客]]></title>
+      <url>/2017/05/01/first-article/</url>
+      <content type="html"><![CDATA[<h2 id="博客初衷"><a href="#博客初衷" class="headerlink" title="博客初衷"></a>博客初衷</h2><p>&emsp;&emsp;一直有一个想法，想把自己的博客整的干净点，技术、随笔之类的东西专门搞一个小博客，之前的站太砸碎了，作为一个资深五迷，我果断的注册了imayday.me这个域名，并在五月来临之际着手搞这个博客，于是。。。本博客的第一篇文章出现了~~o(∩_∩)o</p>
+<h2 id="着手开始"><a href="#着手开始" class="headerlink" title="着手开始"></a>着手开始</h2><p>&emsp;&emsp;看了很多博客框架，wordpress、emlog、zblog等等，最终我还是将我的博客选用了hexo的框架，觉得这个框架其实比较轻量，比较适合个人使用，最重要的是，你只需要购买一个域名就能使用啦，省去了空间或者服务器的费用，同时也能满足一下我瞎折腾的欲望，下面介绍一下让这个博客上线的过程，也算是个建站日志吧！</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>需要安装的环境：<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a>&emsp;&emsp;&emsp;&emsp;(node.js的安装可以点<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="external">这里</a>)</li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="external">git</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(git的安装可以点<a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">这里</a>)</li>
+</ul>
+</li>
+<li>其他需要的准备<ul>
+<li>购买一个域名，这点要说，不用备案即可使用，也是比较方便的。购买域名的途径有很多，我的域名imayday.me是在万网购买的。</li>
+<li>注册一个<a href="https://github.com" target="_blank" rel="external">github</a>账号。你的博客将靠它实现访问。<br>&emsp;&emsp;OK!做完了以上的工作，你就可以开始安装hexo主题框架了！</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>&emsp;&emsp;所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<pre><code>$ npm install -g hexo-cli
+</code></pre><p>&emsp;&emsp;创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：</p>
+<pre><code>hexo init
+</code></pre><p>&emsp;&emsp;好啦，至此，全部安装工作已经完成！</p>
+<p>&emsp;&emsp;因为Hexo编写的文章都是用 markdown语法写的 所以需要生成静态界面也就是Html网页。</p>
+<h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><p>&emsp;&emsp;继续在刚才的Blog目录下执行如下命令，生成静态页面</p>
+<pre><code>hexo generate （hexo g  缩写也可以）
+</code></pre><h3 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h3><p>&emsp;&emsp;启动本地服务，进行文章预览调试，命令：</p>
+<pre><code>hexo server    （hexo s  缩写也可以）
+</code></pre><p>&emsp;&emsp;开启本地预览服务，打开浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可看到内容，很多人会碰到浏览器一直在转圈但是就是加载不出来的问题，一般情况下是因为端口占用的缘故，因为4000这个端口太常见了 ，可以更换个端口号 然后再执行 hexo s<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo server -p 5000 #更改端口随意写</div><div class="line">hexo server -i 192.168.1.1 #自定义 IP</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;运行成功后按Control+L可以停止 如果直接用Hexo s启动会提示错误 就是已经被占用了 所以正确的命令应该是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</div><div class="line">hexo g #生成静态网页</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;上边算是搭建了一个本地的博客系统了 然后就是配置Git了用git就可以把博客移动到远程服务器访问类似<a href="http://imayday.me">我的博客</a></p>
+<h3 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h3><ul>
+<li>建立Repository</li>
+</ul>
+<p>&emsp;&emsp;建立与你用户名对应的仓库，仓库名必须为【useame.github.io】固定写法</p>
+<ul>
+<li>建立关联</li>
+</ul>
+<p>&emsp;&emsp;打开Blog在本地/Users/wangsen/Blog，Blog是之前建Hexo的文件，有：</p>
+<blockquote>
+<p>Blog<br>　｜<br>　｜－－ _config.yml<br>　｜－－ node_modules<br>　｜－－ public<br>　｜－－ source<br>　｜－－ db.json<br>　｜－－ package.json<br>　｜－－ scaffolds<br>　｜－－ themes</p>
+</blockquote>
+<p>&emsp;&emsp;现在我们需要打开_config.yml文件，来建立关联，命令：</p>
+<pre><code>vim _config.yml   我建议用sublime
+</code></pre><p>&emsp;&emsp;如果终端不是在Blog目录就cd到该目录执行命令,epository地址换成你自己的git地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/imaius/imaius.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;执行如下命令才能使用git部署</p>
+<pre><code>npm install hexo-deployer-git --save
+</code></pre><p>配置命令：</p>
+<pre><code>hexo deploy
+</code></pre><p>&emsp;&emsp;作用就是把blog目录下的Public目录下的文件上传至git仓库<br>&emsp;&emsp;然后再浏览器中输入就行了<a href="http://imaius.github.io/，我的" target="_blank" rel="external">http://imaius.github.io/，我的</a> github 的账户叫 imaius ,把这个改成你 github 的账户名就行了<br>&emsp;&emsp;每次修改博客文件后都需要从新部署<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<p><strong><a href="http://www.jianshu.com/p/eb02029f7a81" target="_blank" rel="external">一些常用命令</a></strong></p>
+<h3 id="域名绑定-可选"><a href="#域名绑定-可选" class="headerlink" title="域名绑定(可选)"></a>域名绑定(可选)</h3><p>&emsp;&emsp;其实这一步之前就已经可以正常访问了，有需要的继续进行下一步。</p>
+<p>&emsp;&emsp;首先登录你的github，建一个项目，命名格式为： 账户.github.io，如下图（我的已经建过了所以提示已存在）<br><img src="https://ooo.0o0.ooo/2017/05/03/59096f3dd88b8.png" alt=""> </p>
+<p>&emsp;&emsp;然后你需要把你的域名做一个chanel记录，记录值为上面的域名，我的就是imaius.github.io&emsp;然后在你的本地站点目录里的source目录下添加一个CNAME文件，不带后缀，可以用终端切换到source目录下，执行命令如下</p>
+<pre><code>vim CNAME
+</code></pre><p>&emsp;&emsp;内容是域名地址不带www和http 就类似我的是 imayday.me，填写完了之后再重新部署到github pages上（部署简写命令hexo d -g)，打开自己的博客尽情开始各种蹂躏吧</p>
+<h2 id="说在最后"><a href="#说在最后" class="headerlink" title="说在最后"></a>说在最后</h2><p>&emsp;&emsp;至此博客已经部署成功，如过你有什么疑问也可以在这里留言~本博客准备长期维护，希望各位多多捧场！</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 建站教程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 建站 </tag>
+            
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

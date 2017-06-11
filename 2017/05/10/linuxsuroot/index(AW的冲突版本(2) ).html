@@ -15,17 +15,17 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。">
-<meta name="keywords" content="KODExpore">
+<meta name="description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
+<meta name="keywords" content="linux,运维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次关于KODExpore版权修改过程">
-<meta property="og:url" content="http://imayday.me/2017/05/10/KODExpore/index.html">
+<meta property="og:title" content="Linux命令行在su root后突然变成bash-4.1$的办法">
+<meta property="og:url" content="http://imayday.me/2017/05/10/linuxsuroot/index.html">
 <meta property="og:site_name" content="一只憨人">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。">
-<meta property="og:updated_time" content="2017-05-15T21:36:58.395Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
+<meta property="og:updated_time" content="2017-05-10T15:03:05.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次关于KODExpore版权修改过程">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。">
+<meta name="twitter:title" content="Linux命令行在su root后突然变成bash-4.1$的办法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况 &amp;emsp;&amp;emsp;输入各种命令都是不行的。。不过我找到了解决方法： &amp;emsp;&amp;emsp;1. 在根目录下建立root目录 &amp;emsp;&amp;emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。经测试是有效的，希望能帮助">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>记一次关于KODExpore版权修改过程 | 一只憨人</title>
+<title>Linux命令行在su root后突然变成bash-4.1$的办法 | 一只憨人</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -187,7 +187,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autoptimize/">Autoptimize</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCE/">GCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KODExpore/">KODExpore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bbr/">bbr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddlercore/">fiddlercore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpres/">wordpres</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内核/">内核</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/建站/">建站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/恢复/">恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搬家/">搬家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/还原/">还原</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autoptimize/">Autoptimize</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCE/">GCE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KODExpore/">KODExpore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bbr/">bbr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fiddlercore/">fiddlercore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpres/">wordpres</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内核/">内核</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/建站/">建站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/恢复/">恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搬家/">搬家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/还原/">还原</a></li></ul>
                     </div>
                 </section>
                 
@@ -256,11 +256,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-KODExpore" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-linuxsuroot" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/10/KODExpore/" class="article-date">
-      <time datetime="2017-05-10T14:53:22.000Z" itemprop="datePublished">2017-05-10</time>
+      <a href="/2017/05/10/linuxsuroot/" class="article-date">
+      <time datetime="2017-05-10T14:48:11.000Z" itemprop="datePublished">2017-05-10</time>
 </a>
 
 
@@ -275,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      记一次关于KODExpore版权修改过程
+      Linux命令行在su root后突然变成bash-4.1$的办法
     </h1>
   
 
@@ -283,10 +283,14 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/linux运维/">linux运维</a>
+    </div>
+
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KODExpore/">KODExpore</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -296,17 +300,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>&emsp;&emsp;KODExpore是一个强大的文档管理工具，安装方便，只需要支持php的web环境就可以。闲着没事改了一下版权，发现不能修改，看了半天怀疑是监控了最终页面的信息来防止篡改的。那么接下来给出一个掩耳盗铃的方案，仅供娱乐。</p>
-<h3 id="1-footer部分"><a href="#1-footer部分" class="headerlink" title="1.footer部分"></a>1.footer部分</h3><p>&emsp;&emsp;这一部分疑似检索页内关键词，必须存在版权信息。我们巧妙的利用footer的bug绕过这个。<br>文件位于 /template/common/footer.html。打开文件，很明显的可以看到这行代码，这就是版权信息。</p>
-<pre><code>&lt;pre class=&quot;lang:default decode:true &quot;&gt;echo $L[&apos;copyright_pre&apos;].&apos; v&apos;.KOD_VERSION.&apos; | &apos;.$L[&apos;copyright_info&apos;];&lt;/pre&gt;
-</code></pre><p>&emsp;&emsp;我们在前面一行加上我们要设置的信息即可！效果如下！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true&quot;&gt;echo  &quot;All rights reserved.Powered by hhh v3.41 | Copyright ©&amp;lt;p&amp;gt;&amp;amp;nbsp&amp;lt;/p&amp;gt;&quot; ;</div><div class="line">echo $L[&apos;copyright_pre&apos;].&apos; v&apos;.KOD_VERSION.&apos; | &apos;.$L[&apos;copyright_info&apos;];&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="2-右上角个人信息部分"><a href="#2-右上角个人信息部分" class="headerlink" title="2.右上角个人信息部分"></a>2.右上角个人信息部分</h3><p>&emsp;&emsp;这部分文件在 /template/common/navbar.html</p>
-<p>&emsp;&emsp;找到以下代码并将其注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;&amp;lt;li class=&quot;menu_system_about&quot;&amp;gt;&amp;lt;a href=&quot;javascript:core.setting(&apos;about&apos;);&quot;&amp;gt;&amp;lt;i class=&quot;font-icon icon-info-sign&quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;?php echo $L[&apos;setting_about&apos;];?&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;</div><div class="line">&amp;lt;li role=&quot;presentation&quot; class=&quot;divider&quot;&amp;gt;&amp;lt;/li&amp;gt;&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="3-系统设置内"><a href="#3-系统设置内" class="headerlink" title="3.系统设置内"></a>3.系统设置内</h3><p>&emsp;&emsp;找到 /template/setting/index.php。把设置中的关于注释掉，也就是这段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;&amp;lt;a href=&quot;javascript:void(0);&quot; id=&quot;about&quot;&amp;gt;&amp;lt;i class=&quot;font-icon icon-info-sign&quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;?php echo $L[&apos;setting_about&apos;];?&amp;gt;&amp;lt;/a&amp;gt;&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="4-登录页面的footer"><a href="#4-登录页面的footer" class="headerlink" title="4.登录页面的footer"></a>4.登录页面的footer</h3><p>&emsp;&emsp;登录页面的footer也是没有被覆盖的，文件位于 /static/style/login.css 同下一条一样，修改.common_footer的position属性为fixed，并添加height：30px</p>
-<h3 id="5-其他"><a href="#5-其他" class="headerlink" title="5.其他"></a>5.其他</h3><p>&emsp;&emsp;本以为都改号了，结果躺下后用手机试了是发现footer悬在半空，而且原本的版权也显示出来了，所以找到了移动端的css文件，位于 /static/style/wap/app_explorer.css。修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;pre class=&quot;lang:default decode:true &quot; &gt;.common_footer&#123;bottom:0px;&#125;</div><div class="line">.common_footer&#123;position:fixed;height:20px;bottom:0px;&#125;</div><div class="line">&lt;/pre&gt;</div></pre></td></tr></table></figure></p>
-<p>顺便说一下，pc端的默认css位于 /static/style/skin/base/app_explorer.css如有需要也可修改</p>
-<p>OK！大功告成~！这样就没有任何版权提示拉，以上纯属娱乐，并没有实质上修改版权，如果需要还是请支持正版吧！</p>
+        <p>&emsp;&emsp;今天常规root连接服务器的时候 突然出现了bash-4.1$的情况</p>
+<p>&emsp;&emsp;输入各种命令都是不行的。。不过我找到了解决方法：</p>
+<p>&emsp;&emsp;1. 在根目录下建立root目录</p>
+<p>&emsp;&emsp;2. 拷贝/etc/skel目录下的.bash_logout和.bashrc和.bash_profile到root目录即可。<br>经测试是有效的，希望能帮助到你~</p>
 
       
     </div>
@@ -315,13 +312,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/10/KODExpore/">记一次关于KODExpore版权修改过程</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
-        <p><span>发布时间:</span>2017-05-10, 22:53:22</p>
-        <p><span>最后更新:</span>2017-05-16, 05:36:58</p>
+        <p><span>发布时间:</span>2017-05-10, 22:48:11</p>
+        <p><span>最后更新:</span>2017-05-10, 23:03:05</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/10/KODExpore/" title="记一次关于KODExpore版权修改过程">http://imayday.me/2017/05/10/KODExpore/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/10/KODExpore/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/10/linuxsuroot/" title="Linux命令行在su root后突然变成bash-4.1$的办法">http://imayday.me/2017/05/10/linuxsuroot/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/05/10/linuxsuroot/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -335,15 +332,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/10/phpincrse/">
-                    php下载地址递增代码
+                <a href="/2017/05/10/KODExpore/">
+                    记一次关于KODExpore版权修改过程
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/10/linuxsuroot/">
-                    Linux命令行在su root后突然变成bash-4.1$的办法
+                <a href="/2017/05/04/switch-computer/">
+                    更换电脑继续进行hexo写作
                 </a>
             </div>
         
@@ -355,7 +352,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-footer部分"><span class="toc-number">1.</span> <span class="toc-text">1.footer部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-右上角个人信息部分"><span class="toc-number">2.</span> <span class="toc-text">2.右上角个人信息部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-系统设置内"><span class="toc-number">3.</span> <span class="toc-text">3.系统设置内</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-登录页面的footer"><span class="toc-number">4.</span> <span class="toc-text">4.登录页面的footer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-其他"><span class="toc-number">5.</span> <span class="toc-text">5.其他</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -391,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"记一次关于KODExpore版权修改过程　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Linux命令行在su root后突然变成bash-4.1$的办法　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -410,8 +407,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://imayday.me/2017/05/10/KODExpore/';
-            this.page.identifier = '2017/05/10/KODExpore/';
+            this.page.url = 'http://imayday.me/2017/05/10/linuxsuroot/';
+            this.page.identifier = '2017/05/10/linuxsuroot/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -433,7 +430,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/10/phpincrse/" title="上一篇: php下载地址递增代码">
+            <a href="/2017/05/10/KODExpore/" title="上一篇: 记一次关于KODExpore版权修改过程">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -441,13 +438,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/10/linuxsuroot/" title="下一篇: Linux命令行在su root后突然变成bash-4.1$的办法">
+            <a href="/2017/05/04/switch-computer/" title="下一篇: 更换电脑继续进行hexo写作">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/uname/">centos7系统更换内核</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/ghost/">xp系统还原与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/movewordpress/">史上最全wordpress搬家教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/Autoptimize/">关于wordpress主题中Autoptimize插件的报错</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/fiddlercore/">fiddlercore C#程序参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/phpincrse/">php下载地址递增代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/KODExpore/">记一次关于KODExpore版权修改过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/switch-computer/">更换电脑继续进行hexo写作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/install-nodejs/">linux/windows/mac下的node.js的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/first-article/">利用github配合hexo搭建博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/dockerdaemon/">解决docker安装后出现的小问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/uname/">centos7系统更换内核</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/ghost/">xp系统还原与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/movewordpress/">史上最全wordpress搬家教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/Autoptimize/">关于wordpress主题中Autoptimize插件的报错</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/fiddlercore/">fiddlercore C#程序参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/phpincrse/">php下载地址递增代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/KODExpore/">记一次关于KODExpore版权修改过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/switch-computer/">更换电脑继续进行hexo写作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/install-nodejs/">linux/windows/mac下的node.js的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/first-article/">利用github配合hexo搭建博客</a></li></ul>
 
 
 
