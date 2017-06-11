@@ -15,16 +15,17 @@
 
 
 
-<meta name="description" content="憨人的个人博客，记录点滴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类 &amp; 标签">
-<meta property="og:url" content="http://imayday.me/tags/index.html">
+<meta name="description" content="解决docker安装后出现的小问题,特别是在更换内核后出现的问题">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决docker安装后出现的小问题">
+<meta property="og:url" content="http://imayday.me/2017/06/11/dockerdaemon/index.html">
 <meta property="og:site_name" content="一只憨人">
-<meta property="og:description" content="憨人的个人博客，记录点滴。">
-<meta property="og:updated_time" content="2017-05-02T07:58:24.859Z">
+<meta property="og:description" content="解决docker安装后出现的小问题,特别是在更换内核后出现的问题">
+<meta property="og:updated_time" content="2017-06-11T11:53:59.368Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类 &amp; 标签">
-<meta name="twitter:description" content="憨人的个人博客，记录点滴。">
+<meta name="twitter:title" content="解决docker安装后出现的小问题">
+<meta name="twitter:description" content="解决docker安装后出现的小问题,特别是在更换内核后出现的问题">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>分类 &amp; 标签 | 一只憨人</title>
+<title>解决docker安装后出现的小问题 | 一只憨人</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,7 +67,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -255,11 +256,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="tags-undefined" class="article article-type-tags" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-dockerdaemon" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/tags/index.html" class="article-date">
-      <time datetime="2017-05-08T12:29:42.663Z" itemprop="datePublished">2017-05-08</time>
+      <a href="/2017/06/11/dockerdaemon/" class="article-date">
+      <time datetime="2017-06-11T11:39:17.000Z" itemprop="datePublished">2017-06-11</time>
 </a>
 
 
@@ -274,7 +275,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      分类 &amp; 标签
+      解决docker安装后出现的小问题
     </h1>
   
 
@@ -284,6 +285,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,96 +296,84 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <h3 id="emsp-emsp-解决docker安装后出现Cannot-connect-to-the-Docker-daemon"><a href="#emsp-emsp-解决docker安装后出现Cannot-connect-to-the-Docker-daemon" class="headerlink" title="&emsp;&emsp;解决docker安装后出现Cannot connect to the Docker daemon."></a>&emsp;&emsp;解决docker安装后出现Cannot connect to the Docker daemon.</h3><p>&emsp;&emsp;解决方案:</p>
+<ol>
+<li>su root # 先切换到root用户</li>
+<li>执行以下命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">systemctl enable docker # 开机自动启动docker</div><div class="line"></div><div class="line">systemctl start docker # 启动docker</div><div class="line"></div><div class="line">systemctl restart docker # 重启dokcer</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;完美解决</p>
+<h3 id="出现Unable-to-find-image-‘hello-world-latest’-locally"><a href="#出现Unable-to-find-image-‘hello-world-latest’-locally" class="headerlink" title="出现Unable to find image ‘hello-world:latest’ locally"></a>出现Unable to find image ‘hello-world:latest’ locally</h3><p>这是网络问题，解决方法为添加dns</p>
+<ol>
+<li>登入root（VPS）。</li>
+<li>进入/etc/resolv.conf。</li>
+<li>修改内容为下</li>
+</ol>
+<blockquote>
+<p>nameserver 8.8.8.8 #google域名服务器</p>
+<p>nameserver 8.8.4.4 #google域名服务器</p>
+</blockquote>
 
-
-    <!-- Tag Cloud Page -->
-    <hr>
-<br>
-<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux运维/">linux运维</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/建站教程/">建站教程</a><span class="category-list-count">1</span></li></ul>
-
-<p class="count"></p>
-
-<div class="tags">
-    <a href="/tags/Autoptimize/" style="font-size: 16px; color: #808080">Autoptimize</a> <a href="/tags/GCE/" style="font-size: 16px; color: #808080">GCE</a> <a href="/tags/KODExpore/" style="font-size: 16px; color: #808080">KODExpore</a> <a href="/tags/bbr/" style="font-size: 16px; color: #808080">bbr</a> <a href="/tags/c/" style="font-size: 16px; color: #808080">c#</a> <a href="/tags/centos/" style="font-size: 16px; color: #808080">centos</a> <a href="/tags/docker/" style="font-size: 16px; color: #808080">docker</a> <a href="/tags/fiddlercore/" style="font-size: 16px; color: #808080">fiddlercore</a> <a href="/tags/hexo/" style="font-size: 35px; color: #000">hexo</a> <a href="/tags/linux/" style="font-size: 16px; color: #808080">linux</a> <a href="/tags/php/" style="font-size: 16px; color: #808080">php</a> <a href="/tags/shadowsocks/" style="font-size: 16px; color: #808080">shadowsocks</a> <a href="/tags/windows/" style="font-size: 16px; color: #808080">windows</a> <a href="/tags/wordpres/" style="font-size: 16px; color: #808080">wordpres</a> <a href="/tags/wordpress/" style="font-size: 16px; color: #808080">wordpress</a> <a href="/tags/内核/" style="font-size: 16px; color: #808080">内核</a> <a href="/tags/博客/" style="font-size: 16px; color: #808080">博客</a> <a href="/tags/建站/" style="font-size: 35px; color: #000">建站</a> <a href="/tags/恢复/" style="font-size: 16px; color: #808080">恢复</a> <a href="/tags/搬家/" style="font-size: 16px; color: #808080">搬家</a> <a href="/tags/运维/" style="font-size: 16px; color: #808080">运维</a> <a href="/tags/还原/" style="font-size: 16px; color: #808080">还原</a>
-</div>
-<style>
-    .category-list li{
-        display: inline-block;
-        margin: 0 1em .5em 0;
-        padding: 4px;
-        border: 1px solid lightgray;
-        font-size: 1.2rem;
-    }
-    .category-list a { color: gray; }
-    .category-list-item:hover a {
-        color: gray;
-        text-decoration: none;
-    }
-    .category-list-count {
-        margin-left: 2px;
-        font-size: .9rem;
-    }
-    .article-entry ul li:before{ display: none; }
-    .article-inner { text-align: center; }
-    .tags {
-        max-width: 42em;
-        margin: 2em auto;
-        margin-top: 0em;
-    }
-    .tags a {
-        margin-right: 1em;
-        line-height: 65px;
-        border-bottom: 1px solid gray;
-        white-space: nowrap;
-        transition: border-bottom .5s;
-    }
-    .tags a:hover {
-        border-bottom: 3px dotted gray;
-        text-decoration: none;
-    }
-    #count > span {
-        margin: auto .2em;
-        font-weight: bold;
-    }
-</style>
-
-<!-- Count tags and categories -->
-<p id="count">
-        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
-        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
-</p>
-<script>
-    $('#count').appendTo('.count');
-</script>
-
-          
-        
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/11/dockerdaemon/">解决docker安装后出现的小问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">憨 人</a></p>
+        <p><span>发布时间:</span>2017-06-11, 19:39:17</p>
+        <p><span>最后更新:</span>2017-06-11, 19:53:59</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/11/dockerdaemon/" title="解决docker安装后出现的小问题">http://imayday.me/2017/06/11/dockerdaemon/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://imayday.me/2017/06/11/dockerdaemon/　　作者: 憨 人" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+		<p><span>关于评论:</span>本站开启Disqus，评论需科学上网。</p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/06/07/uname/">
+                    centos7系统更换内核
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#emsp-emsp-解决docker安装后出现Cannot-connect-to-the-Docker-daemon"><span class="toc-number">1.</span> <span class="toc-text">  解决docker安装后出现Cannot connect to the Docker daemon.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现Unable-to-find-image-‘hello-world-latest’-locally"><span class="toc-number">2.</span> <span class="toc-text">出现Unable to find image ‘hello-world:latest’ locally</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -398,7 +391,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"分类 & 标签　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"解决docker安装后出现的小问题　| 一只憨人　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -417,8 +410,8 @@
     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function(){
-            this.page.url = 'http://imayday.me/tags/index.html';
-            this.page.identifier = 'tags/index.html';
+            this.page.url = 'http://imayday.me/2017/06/11/dockerdaemon/';
+            this.page.identifier = '2017/06/11/dockerdaemon/';
         };
         var loadComment = function(){
             var d = document, s = d.createElement('script');
@@ -435,6 +428,24 @@
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/06/07/uname/" title="下一篇: centos7系统更换内核">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/11/dockerdaemon/">解决docker安装后出现的小问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/uname/">centos7系统更换内核</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/ghost/">xp系统还原与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/ss-bbr/">记录利用免费的谷歌云搭建ss和bbr遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/movewordpress/">史上最全wordpress搬家教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/Autoptimize/">关于wordpress主题中Autoptimize插件的报错</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/fiddlercore/">fiddlercore C#程序参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/phpincrse/">php下载地址递增代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/KODExpore/">记一次关于KODExpore版权修改过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/10/linuxsuroot/">Linux命令行在su root后突然变成bash-4.1$的办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/switch-computer/">更换电脑继续进行hexo写作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/install-nodejs/">linux/windows/mac下的node.js的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/first-article/">利用github配合hexo搭建博客</a></li></ul>
 
 
 
